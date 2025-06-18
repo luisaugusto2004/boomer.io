@@ -25,25 +25,9 @@ namespace boomer_shooter_api.Repositories.QuoteRepository
             return await _context.Quotes.Include(q => q.Character).ThenInclude(q => q.Franchise).ToListAsync();
         }
 
-        public async Task<QuoteModel> GetByIdAsync(int id)
+        public async Task<QuoteModel?> GetByIdAsync(int id)
         {
-            var quote = await _context.Quotes.Include(q => q.Character).ThenInclude(q => q.Franchise).FirstOrDefaultAsync(q => q.Id == id);
-            return quote;
-        }
-
-        public async Task AddAsync(QuoteModel quote)
-        {
-            await _context.Quotes.AddAsync(quote);
-        }
-
-        public void Delete(QuoteModel quote)
-        {
-            _context.Quotes.Remove(quote);
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
+            return await _context.Quotes.Include(q => q.Character).ThenInclude(q => q.Franchise).FirstOrDefaultAsync(q => q.Id == id);
         }
 
         public async Task<QuoteModel> GetRandomQuote()
@@ -59,11 +43,6 @@ namespace boomer_shooter_api.Repositories.QuoteRepository
             var quote = await _context.Quotes.Include(q => q.Character).ThenInclude(c => c.Franchise).OrderBy(q => q.Id).Skip(index).FirstAsync();
 
             return quote;
-        }
-
-        public async Task Update(QuoteModel quote)
-        {
-            _context.Update(quote);
         }
     }
 }

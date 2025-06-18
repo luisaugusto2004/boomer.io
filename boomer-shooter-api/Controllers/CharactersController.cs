@@ -19,7 +19,7 @@ namespace boomer_shooter_api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ResponseModel<List<CharacterDto>>>> GetAllAsync()
+        public async Task<ActionResult<List<CharacterDto>>> GetAllAsync()
         {
             var characters = await _characterService.GetAllAsync();
             return Ok(characters);

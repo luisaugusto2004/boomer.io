@@ -14,41 +14,20 @@ namespace boomer_shooter_api.Services.CharacterService
             _characterRepository = characterRepository;
         }
 
-        public async Task<ResponseModel<List<CharacterDto>>> GetAllAsync()
+        public async Task<List<CharacterDto>> GetAllAsync()
         {
-            ResponseModel<List<CharacterDto>> response = new ResponseModel<List<CharacterDto>>();
-            try
-            {
-                var characters = await _characterRepository.GetAll();
+            var characters = await _characterRepository.GetAll();
 
-                if(characters == null)
-                {
-                    response.Data = new List<CharacterDto>();
-                    response.Message = "No characters were found";
-                    return response;
-                }
-                response.Data = characters.Select(c => new CharacterDto
-                {
-                    Id = c.Id,
-                    Franchise = c.Franchise.Name,
-                    Name = c.Name
-                    
-                }).ToList();
-                response.Message = "All characters returned!";
-
-                return response;
-                
-            }
-            catch (Exception e)
+            if (characters == null)
             {
-                response.Data = null;
-                response.Message = $"An unexpected error occurred: {e.Message}";
-                response.Status = false;
-                return response;
+                return new List<CharacterDto>();
             }
+
+            var characterDtos = characters.Select(c => ToDto(c)).ToList();
+            return characterDtos;
         }
 
-        public Task<ResponseModel<CharacterDto>> GetById(int id)
+        public Task<CharacterDto> GetById(int id)
         {
             throw new NotImplementedException();
         }
@@ -60,16 +39,6 @@ namespace boomer_shooter_api.Services.CharacterService
                 Id = character.Id,
                 Franchise = character.Franchise.Name,
                 Name = character.Name
-            };
-        }
-
-        public ResponseModel<CharacterDto> ExceptionResponse(Exception e)
-        {
-            return new ResponseModel<CharacterDto>
-            {
-                Data = null,
-                Message = $"An unexpected error occurred: {e.Message}",
-                Status = false
             };
         }
     }

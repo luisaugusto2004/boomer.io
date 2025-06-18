@@ -1,4 +1,5 @@
 using boomer_shooter_api.Data;
+using boomer_shooter_api.Middleware;
 using boomer_shooter_api.Repositories.CharacterRepository;
 using boomer_shooter_api.Repositories.QuoteRepository;
 using boomer_shooter_api.Services.CharacterService;
@@ -16,20 +17,11 @@ namespace boomer_shooter_api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<IQuoteService, QuoteService>();
-            builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
-            builder.Services.AddScoped<ICharacterService, CharacterService>();
-            builder.Services.AddScoped<IQuoteRepository, QuoteRepository>();
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("BoomerShooterDb"));
-            });
+            ConfigureServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -46,6 +38,20 @@ namespace boomer_shooter_api
             app.MapControllers();
 
             app.Run();
+        }
+        private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
+            services.AddScoped<IQuoteService, QuoteService>();
+            services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<IQuoteRepository, QuoteRepository>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("BoomerShooterDb")));
         }
     }
 }

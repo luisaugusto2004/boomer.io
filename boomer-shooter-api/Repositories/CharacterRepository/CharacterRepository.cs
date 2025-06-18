@@ -13,9 +13,7 @@ namespace boomer_shooter_api.Repositories.CharacterRepository
             _context = context;
         }
 
-
-
-        public async Task<CharacterModel> FindCharacterAsync(int id)
+        public async Task<CharacterModel?> FindCharacterAsync(int id)
         {
             return await _context.Characters.Include(c => c.Franchise).FirstOrDefaultAsync(c => c.Id == id);
         }
