@@ -1,7 +1,5 @@
 ﻿using boomer_shooter_api.DTOs.CharacterDTOs;
-using boomer_shooter_api.Models;
 using boomer_shooter_api.Services.CharacterService;
-using boomer_shooter_api.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace boomer_shooter_api.Controllers

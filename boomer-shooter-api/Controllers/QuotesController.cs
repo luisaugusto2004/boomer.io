@@ -1,5 +1,4 @@
 ﻿using boomer_shooter_api.DTOs.QuoteDTOs;
-using boomer_shooter_api.Models;
 using boomer_shooter_api.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 
