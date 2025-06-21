@@ -27,9 +27,15 @@ namespace boomer_shooter_api.Services.CharacterService
             return characterDtos;
         }
 
-        public Task<CharacterDto> GetById(int id)
+        public async Task<CharacterDto?> GetById(int id)
         {
-            throw new NotImplementedException();
+            var character = await _characterRepository.GetById(id);
+            if (character == null)
+            {
+                return null;
+            }
+
+            return ToDto(character);
         }
 
         public CharacterDto ToDto(CharacterModel character)
