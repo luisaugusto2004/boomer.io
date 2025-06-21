@@ -8,12 +8,10 @@ namespace boomer_shooter_api.Services.QuoteService
     public class QuoteService : IQuoteService
     {
         private readonly IQuoteRepository _quoteRepository;
-        private readonly ICharacterRepository _characterRepository;
 
-        public QuoteService(IQuoteRepository quoteRepository, ICharacterRepository characterRepository)
+        public QuoteService(IQuoteRepository quoteRepository)
         {
             _quoteRepository = quoteRepository;
-            _characterRepository = characterRepository;
         }
 
         public async Task<List<QuoteDto>> GetAll()
@@ -23,19 +21,17 @@ namespace boomer_shooter_api.Services.QuoteService
             {
                 return new List<QuoteDto>();
             }
-            var quotesDto = quotes.Select(q => ToDto(q)).ToList();
-            return quotesDto;
+            return quotes.Select(ToDto).ToList();
         }
-        public async Task<List<QuoteDto>> GetByCharacterId(int id)
+        public async Task<List<QuoteDto>> GetByCharacterId(int idCharacter)
         {
-            var quotes = await _quoteRepository.GetByCharacterId(id);
+            var quotes = await _quoteRepository.GetByCharacterId(idCharacter);
 
             if (quotes == null || !quotes.Any())
             {
                 return new List<QuoteDto>();
             }
-            var quotesDto = quotes.Select(q => ToDto(q)).ToList();
-            return quotesDto;
+            return quotes.Select(ToDto).ToList();
         }
 
         public async Task<QuoteDto?> GetById(int id)

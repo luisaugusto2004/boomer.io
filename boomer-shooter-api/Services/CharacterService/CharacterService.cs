@@ -22,9 +22,7 @@ namespace boomer_shooter_api.Services.CharacterService
             {
                 return new List<CharacterDto>();
             }
-
-            var characterDtos = characters.Select(c => ToDto(c)).ToList();
-            return characterDtos;
+            return characters.Select(ToDto).ToList();
         }
 
         public async Task<CharacterDto?> GetById(int id)
@@ -38,14 +36,22 @@ namespace boomer_shooter_api.Services.CharacterService
             return ToDto(character);
         }
 
-        public CharacterDto ToDto(CharacterModel character)
+        public async Task<List<CharacterDto>> GetByFranchiseId(int idFranchise)
         {
-            return new CharacterDto
+            var characters = await _characterRepository.GetByFranchiseId(idFranchise);
+
+            if (characters == null || !characters.Any())
             {
-                Id = character.Id,
-                Franchise = character.Franchise.Name,
-                Name = character.Name
-            };
+                return new List<CharacterDto>();
+            }
+            return characters.Select(ToDto).ToList();
         }
+
+        public CharacterDto ToDto(CharacterModel character) => new CharacterDto
+        {
+            Id = character.Id,
+            Franchise = character.Franchise.Name,
+            Name = character.Name
+        };
     }
 }

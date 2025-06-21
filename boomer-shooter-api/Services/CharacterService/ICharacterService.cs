@@ -6,5 +6,6 @@ namespace boomer_shooter_api.Services.CharacterService
     {
         Task<List<CharacterDto>> GetAllAsync();
         Task<CharacterDto?> GetById(int id);
+        Task<List<CharacterDto>> GetByFranchiseId(int idFranchise);
     }
 }

@@ -6,7 +6,7 @@ namespace boomer_shooter_api.Services.QuoteService
     {
         Task<List<QuoteDto>> GetAll();
         Task<QuoteDto?> GetById(int id);
-        Task<List<QuoteDto>> GetByCharacterId(int id);
+        Task<List<QuoteDto>> GetByCharacterId(int idCharacter);
         Task<QuoteDto?> GetRandomQuote();
     }
 }

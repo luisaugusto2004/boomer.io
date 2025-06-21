@@ -38,5 +38,21 @@ namespace boomer_shooter_api.Controllers
             }
             return Ok(character);
         }
+
+        [HttpGet("franchise/{idFranchise}")]
+        public async Task<ActionResult<List<CharacterDto>>> GetByFranchiseId(int idFranchise)
+        {
+            var characters = await _characterService.GetByFranchiseId(idFranchise);
+            if (characters == null || !characters.Any())
+            {
+                return NotFound(new
+                {
+                    type = "NotFound",
+                    status = 404,
+                    message = "No characters found for this franchise."
+                });
+            }
+            return Ok(characters);
+        }
     }
 }

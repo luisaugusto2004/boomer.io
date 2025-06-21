@@ -15,9 +15,9 @@ namespace boomer_shooter_api.Repositories.QuoteRepository
             _context = context;
         }
 
-        public async Task<List<QuoteModel>> GetByCharacterId(int id)
+        public async Task<List<QuoteModel>> GetByCharacterId(int idCharacter)
         {
-            return await _context.Quotes.Include(q => q.Character).ThenInclude(q => q.Franchise).Where(q => q.Character.Id == id).ToListAsync();
+            return await _context.Quotes.Include(q => q.Character).ThenInclude(q => q.Franchise).Where(q => q.Character.Id == idCharacter).ToListAsync();
         }
 
         public async Task<List<QuoteModel>> GetAllAsync()

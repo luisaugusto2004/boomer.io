@@ -6,5 +6,6 @@ namespace boomer_shooter_api.Repositories.CharacterRepository
     {
         Task<CharacterModel?> GetById(int id);
         Task<List<CharacterModel>> GetAll();
+        Task<List<CharacterModel>> GetByFranchiseId(int franchiseId);
     }
 }

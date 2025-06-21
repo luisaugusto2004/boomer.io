@@ -22,5 +22,13 @@ namespace boomer_shooter_api.Repositories.CharacterRepository
         {
             return await _context.Characters.Include(c => c.Franchise).ToListAsync();
         }
+
+        public Task<List<CharacterModel>> GetByFranchiseId(int franchiseId)
+        {
+            return _context.Characters
+                .Include(c => c.Franchise)
+                .Where(c => c.Franchise.Id == franchiseId)
+                .ToListAsync();
+        }
     }
 }
