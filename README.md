@@ -6,12 +6,12 @@ A lightweight **RESTful API** serving quotes from classic *boomer shooters* (e.g
 
 ## 🚀 Features
 
-- ✅ Get random quotes (`/api/quotes/random`)
-- ✅ Get all quotes (`/api/quotes`)
-- ✅ Get a quote by ID (`/api/quotes/{id}`)
-- ✅ Get quotes by character (`/api/quotes/character/{idCharacter}`)
-- ✅ Get all available characters (`/api/characters`)
-- ✅ Get all available franchises (`/api/franchise`)
+- ✅ Get random quotes (`/api/Quotes/random`)
+- ✅ Get all quotes (`/api/Quotes`)
+- ✅ Get a quote by ID (`/api/Quotes/{id}`)
+- ✅ Get quotes by character (`/api/Quotes/character/{idCharacter}`)
+- ✅ Get all available characters (`/api/Characters`)
+- ✅ Get all available franchises (`/api/Franchises`)
 - ✅ Simple frontend (HTML/JS) to test API endpoints
 
 ---
@@ -29,12 +29,12 @@ A lightweight **RESTful API** serving quotes from classic *boomer shooters* (e.g
 
 | Method | Route                                   | Description                          |
 |--------|----------------------------------------|------------------------------------|
-| GET    | `/api/quotes/random`                   | Get a random quote                  |
-| GET    | `/api/quotes`                          | Get all quotes                     |
-| GET    | `/api/quotes/{id}`                     | Get quote by ID                    |
-| GET    | `/api/quotes/character/{idCharacter}` | Get quotes for a specific character|
-| GET    | `/api/characters`                      | Get all characters                 |
-| GET    | `/api/franchise`                       | Get all franchises                 |
+| GET    | `/api/Quotes/random`                   | Get a random quote                  |
+| GET    | `/api/Quotes`                          | Get all quotes                     |
+| GET    | `/api/Quotes/{id}`                     | Get quote by ID                    |
+| GET    | `/api/Quotes/character/{idCharacter}` | Get quotes for a specific character|
+| GET    | `/api/Characters`                      | Get all characters                 |
+| GET    | `/api/Franchises`                       | Get all franchises                 |
 
 ---
 
