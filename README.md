@@ -43,7 +43,7 @@ A lightweight **RESTful API** serving quotes from classic *boomer shooters* (e.g
 ### Backend (.NET 8):
 
 ```bash
-cd boomer.io.api
+cd boomerio
 dotnet restore
 dotnet run
 ```
