@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <title>Boomer Shooter Quotes API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <style>
       body {
         background-color: #1a1a1a;
@@ -16,13 +19,22 @@
         min-height: 100vh;
         margin: 0;
       }
+      p {
+        font-size: 15px;
+      }
       .container {
         text-align: center;
         width: 100%;
         max-width: 800px;
       }
+      .content {
+        text-align: left;
+        padding-left: 50px;
+      }
       h1 {
         color: #ffa500;
+        text-align: left;
+        font-family: "Pixelify Sans", sans-serif;
         margin-bottom: 20px;
       }
       img {
@@ -56,7 +68,7 @@
         max-height: 400px;
         overflow-y: auto;
         border-radius: 8px;
-        color: #00ff00;
+        color: #ff3333;
       }
       #Logo {
         width: 400px;
@@ -72,19 +84,87 @@
         margin: 5px 0;
         color: #ff6666;
       }
+      .site-footer {
+        background-color: transparent; /* Preto bem escuro */
+        color: #999999; /* Um cinza mais suave para o texto */
+        padding: 20px;
+        margin-top: 40px; /* Espaço entre o conteúdo principal e o rodapé */
+        border-top: 1px solid #333333; /* Uma linha fina para separar */
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura total */
+      }     
+      .site-footer p {
+        margin: 5px 0;
+        font-size: 0.9em;
+      }
+      .site-footer .footer-links a {
+        color: #ff6666; /* Um vermelho mais suave para os links */
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+      }
+      .site-footer .footer-links a:hover {
+        color: #ff0000; /* Vermelho mais vibrante no hover */
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <img src="Assets/boomer_logo.png" id="Logo" alt="Boomer Shooter Logo" />
-      <h1>Boomer Shooter Quotes API</h1>
-      <button onclick="getRandomQuote()">Get Random Quote</button>
-      <button onclick="getAllCharacters()">List Characters</button>
-      <button onclick="getAllFranchises()">List Franchises</button>
+      <div class="content">
+        <h1>Boomer Shooter Quotes API</h1>
+        <p style="color: #ffcc00;font-family: 'Courier New', monospace;font-weight: bold;text-align: left;">
+          Looking for badass one-liners from classic boomer shooters?<br/>
+          This free API serves quotes straight from the golden age of FPS
+          games.<br/>
+          Built for fans, devs, and retro maniacs alike!
+        </p>
 
-      <pre class="quote-box" id="output">Click a button to start.</pre>
+        <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
+          Usage
+        </h2>
+
+        <p>
+          Retrieve a random quote from a classic boomer shooter game in JSON
+          format.
+        </p>
+
+        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
+        >GET https://boomer.io/api/quote/random</pre>
+
+        <p>Example response:</p>
+
+        <pre class="quote-box" id="output"></pre>
+
+        <p>
+          <a href="#!" onclick="getRandomQuote()" style="color: red">
+            Get me a new one...
+          </a>
+        </p>
+      </div>
+
+      <footer class="site-footer">
+        <p>
+          The Boomer Shooter Quotes API is a free and open-source project<br />
+          designed to provide quotes from classic boomer shooter games.<br />
+          It is not affiliated with any game developers or publishers.<br />
+          All quotes are sourced from various games and are intended<br />
+          for educational and entertainment purposes only.<br />
+          All trademarks and copyrights belong to their respective owners.
+        </p>
+        <p>
+          <br />This project was made with love by a lifelong fan of boomer
+          shooters.<br><br>
+        </p>
+        <div class="footer-links">
+          <a href="https://github.com/luisaugusto2004" target="_blank" rel="noopener noreferrer"
+            >GitHub</a>
+        </div>
+        <p>&copy; 2025 Boomer Shooter Quotes API. Developed by Luis.</p>
+      </footer>
     </div>
-
     <script>
       const baseUrl = "https://localhost:7239";
 
@@ -133,6 +213,10 @@
             "Error fetching franchises: " + error.message;
         }
       }
+
+      window.onload = () => {
+        getRandomQuote();
+      };
     </script>
   </body>
 </html>
