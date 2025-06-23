@@ -61,6 +61,7 @@ namespace boomerio.Services.QuoteService
             CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
             UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
             Franchise = quote.Character.Franchise.Name,
+            IconUrl = quote.Character.Franchise.IconUrl,
             Character = quote.Character.Name,
             Value = quote.QuoteText
         };
