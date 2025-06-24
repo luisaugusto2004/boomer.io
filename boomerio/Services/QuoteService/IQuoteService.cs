@@ -8,5 +8,6 @@ namespace boomerio.Services.QuoteService
         Task<QuoteDto?> GetById(int id);
         Task<List<QuoteDto>> GetByCharacterId(int idCharacter);
         Task<QuoteDto?> GetRandomQuote();
+        Task<List<QuoteDto>> GetByTerm(string query);
     }
 }

@@ -16,20 +16,18 @@ namespace boomerio.Services.QuoteService
         public async Task<List<QuoteDto>> GetAll()
         {
             var quotes = await _quoteRepository.GetAllAsync();
-            if (quotes == null)
-            {
-                return new List<QuoteDto>();
-            }
             return quotes.Select(ToDto).ToList();
         }
+
         public async Task<List<QuoteDto>> GetByCharacterId(int idCharacter)
         {
             var quotes = await _quoteRepository.GetByCharacterId(idCharacter);
+            return quotes.Select(ToDto).ToList();
+        }
 
-            if (quotes == null || !quotes.Any())
-            {
-                return new List<QuoteDto>();
-            }
+        public async Task<List<QuoteDto>> GetByTerm(string query)
+        {
+            var quotes = await _quoteRepository.GetByTermAsync(query);
             return quotes.Select(ToDto).ToList();
         }
 

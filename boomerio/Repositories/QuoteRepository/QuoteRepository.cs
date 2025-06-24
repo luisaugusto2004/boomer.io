@@ -34,7 +34,7 @@ namespace boomerio.Repositories.QuoteRepository
         {
             int count = await _context.Quotes.CountAsync();
 
-            if(count == 0)
+            if (count == 0)
             {
                 throw new InvalidOperationException("No quotes available");
             }
@@ -43,6 +43,15 @@ namespace boomerio.Repositories.QuoteRepository
             var quote = await _context.Quotes.Include(q => q.Character).ThenInclude(c => c.Franchise).OrderBy(q => q.Id).Skip(index).FirstAsync();
 
             return quote;
+        }
+
+        public async Task<List<QuoteModel>> GetByTermAsync(string query)
+        {
+            return await _context.Quotes
+                .Include(q => q.Character)
+                .ThenInclude(c => c.Franchise)
+                .Where(q => q.QuoteText.Contains(query))
+                .ToListAsync();
         }
     }
 }

@@ -60,5 +60,30 @@ namespace boomerio.Controllers
             }
             return Ok(quotes);
         }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<List<QuoteDto>>> GetByTerm([FromQuery] string term)
+        {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return BadRequest(new
+                {
+                    type = "BadRequest",
+                    status = 400,
+                    message = "Search term cannot be empty."
+                });
+            }
+            var quotes = await _quoteService.GetByTerm(term);
+            if (quotes == null || !quotes.Any())
+            {
+                return NotFound(new
+                {
+                    type = "NotFound",
+                    status = 404,
+                    message = "No quotes found for the given term."
+                });
+            }
+            return Ok(quotes);
+        }
     }
 }
