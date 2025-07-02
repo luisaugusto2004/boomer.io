@@ -60,7 +60,7 @@ namespace boomerio.Repositories.QuoteRepository
             return quote;
         }
 
-        public async Task<List<QuoteModel>> GetByTermAsync(string query)
+        public async Task<List<QuoteModel>> GetByQueryAsync(string query)
         {
             return await _context
                 .Quotes.Include(q => q.Character)

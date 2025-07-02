@@ -21,12 +21,14 @@ namespace boomerio.Controllers
             var quote = await _quoteService.GetRandomQuote();
             if (quote == null)
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "No quotes available in the system."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "No quotes available in the system.",
+                    }
+                );
             }
             return Ok(quote);
         }
@@ -43,22 +45,26 @@ namespace boomerio.Controllers
         {
             if (id <= 0)
             {
-                return BadRequest(new
-                {
-                    type = "BadRequest",
-                    status = 400,
-                    message = "ID must be greater than zero."
-                });
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "ID must be greater than zero.",
+                    }
+                );
             }
             var quote = await _quoteService.GetById(id);
             if (quote == null)
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "Quote not found."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "Quote not found.",
+                    }
+                );
             }
             return Ok(quote);
         }
@@ -68,47 +74,55 @@ namespace boomerio.Controllers
         {
             if (idCharacter <= 0)
             {
-                return BadRequest(new
-                {
-                    type = "BadRequest",
-                    status = 400,
-                    message = "Character ID must be greater than zero."
-                });
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "Character ID must be greater than zero.",
+                    }
+                );
             }
             var quotes = await _quoteService.GetByCharacterId(idCharacter);
             if (quotes == null || !quotes.Any())
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "No quotes found for this character."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "No quotes found for this character.",
+                    }
+                );
             }
             return Ok(quotes);
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<List<QuoteDto>>> GetByTerm([FromQuery] string term)
+        public async Task<ActionResult<List<QuoteDto>>> GetByQuery([FromQuery] string query)
         {
-            if (string.IsNullOrWhiteSpace(term))
+            if (string.IsNullOrWhiteSpace(query))
             {
-                return BadRequest(new
-                {
-                    type = "BadRequest",
-                    status = 400,
-                    message = "Search term cannot be empty."
-                });
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "Search term cannot be empty.",
+                    }
+                );
             }
-            var quotes = await _quoteService.GetByTerm(term);
+            var quotes = await _quoteService.GetByQuery(query);
             if (quotes == null || !quotes.Any())
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "No quotes found for the given term."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "No quotes found for the given query.",
+                    }
+                );
             }
             return Ok(quotes);
         }

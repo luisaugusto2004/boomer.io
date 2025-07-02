@@ -25,9 +25,9 @@ namespace boomerio.Services.QuoteService
             return quotes.Select(ToDto).ToList();
         }
 
-        public async Task<List<QuoteDto>> GetByTerm(string query)
+        public async Task<List<QuoteDto>> GetByQuery(string query)
         {
-            var quotes = await _quoteRepository.GetByTermAsync(query);
+            var quotes = await _quoteRepository.GetByQueryAsync(query);
             return quotes.Select(ToDto).ToList();
         }
 
@@ -53,16 +53,17 @@ namespace boomerio.Services.QuoteService
             return ToDto(quote);
         }
 
-        public QuoteDto ToDto(QuoteModel quote) => new QuoteDto
-        {
-            Id = quote.Id,
-            CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
-            UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
-            Franchise = quote.Character.Franchise.Name,
-            IconUrl = quote.Character.Franchise.IconUrl,
-            CharacterId = quote.Character.Id,
-            Character = quote.Character.Name,
-            Value = quote.QuoteText
-        };
+        public QuoteDto ToDto(QuoteModel quote) =>
+            new QuoteDto
+            {
+                Id = quote.Id,
+                CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
+                UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
+                Franchise = quote.Character.Franchise.Name,
+                IconUrl = quote.Character.Franchise.IconUrl,
+                CharacterId = quote.Character.Id,
+                Character = quote.Character.Name,
+                Value = quote.QuoteText,
+            };
     }
 }

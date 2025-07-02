@@ -286,5 +286,68 @@ namespace boomerio.Tests
             var returnedQuotes = Assert.IsType<List<QuoteDto>>(okResult.Value);
             returnedQuotes.Should().HaveCount(expectedQuotes.Count);
         }
+
+        [Fact]
+        public async Task GetByQuery_ReturnsExpectedQuotes()
+        {
+            // Arrange
+            string query = "test";
+            List<QuoteDto> expected = new List<QuoteDto>
+            {
+                new QuoteDto { Value = "Test quote 1", Character = "Character 1" },
+                new QuoteDto { Value = "Test quote 2", Character = "Character 2" },
+            };
+
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetByQuery(query)).Returns(Task.FromResult(expected));
+
+            var controller = new QuotesController(fakeService);
+
+            // Act
+            var result = await controller.GetByQuery(query);
+
+            // Then
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var returnedQuotes = Assert.IsType<List<QuoteDto>>(okResult.Value);
+            foreach (QuoteDto qdto in expected)
+            {
+                qdto.Value.ToLower().Should().Contain(query.ToLower());
+            }
+        }
+
+        [Fact]
+        public async Task GetByQuery_ReturnsNotFound_WhenNoQuotesFound()
+        {
+            // Arrange
+            string query = "nonexistent";
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetByQuery(query))
+                .Returns(Task.FromResult(new List<QuoteDto>()));
+
+            var controller = new QuotesController(fakeService);
+
+            // Act
+            var result = await controller.GetByQuery(query);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetByQuery_ReturnsBadRequest_WhenQueryIsEmpty()
+        {
+            // Arrange
+            string query = string.Empty;
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetByQuery(query))
+                .Returns(Task.FromResult(new List<QuoteDto>()));
+            var controller = new QuotesController(fakeService);
+
+            // Act
+            var result = await controller.GetByQuery(query);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
     }
 }
