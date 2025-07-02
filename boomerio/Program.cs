@@ -7,7 +7,6 @@ using boomerio.Services.CharacterService;
 using boomerio.Services.FranchiseService;
 using boomerio.Services.QuoteService;
 using Microsoft.EntityFrameworkCore;
-using SwaggerThemes;
 
 namespace boomerio
 {
@@ -29,7 +28,7 @@ namespace boomerio
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(Theme.UniversalDark);
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
