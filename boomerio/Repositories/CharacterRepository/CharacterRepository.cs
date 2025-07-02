@@ -15,7 +15,9 @@ namespace boomerio.Repositories.CharacterRepository
 
         public async Task<CharacterModel?> GetById(int id)
         {
-            return await _context.Characters.Include(c => c.Franchise).FirstOrDefaultAsync(c => c.Id == id);
+            return await _context
+                .Characters.Include(c => c.Franchise)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<List<CharacterModel>> GetAll()
@@ -25,8 +27,8 @@ namespace boomerio.Repositories.CharacterRepository
 
         public Task<List<CharacterModel>> GetByFranchiseId(int franchiseId)
         {
-            return _context.Characters
-                .Include(c => c.Franchise)
+            return _context
+                .Characters.Include(c => c.Franchise)
                 .Where(c => c.Franchise.Id == franchiseId)
                 .ToListAsync();
         }

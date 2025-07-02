@@ -1,5 +1,5 @@
-using boomerio.Services.FranchiseService;
 using boomerio.DTOs.FranchiseDTOs;
+using boomerio.Services.FranchiseService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace boomerio.Controllers
@@ -28,12 +28,14 @@ namespace boomerio.Controllers
             var franchise = await _franchiseService.GetById(id);
             if (franchise == null)
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "Franchise not found."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "Franchise not found.",
+                    }
+                );
             }
             return Ok(franchise);
         }

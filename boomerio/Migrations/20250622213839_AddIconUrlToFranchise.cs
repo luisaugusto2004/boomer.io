@@ -15,15 +15,14 @@ namespace boomerio.Migrations
                 table: "Franchises",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "IconUrl",
-                table: "Franchises");
+            migrationBuilder.DropColumn(name: "IconUrl", table: "Franchises");
         }
     }
 }

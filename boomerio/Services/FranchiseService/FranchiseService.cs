@@ -1,6 +1,6 @@
-using boomerio.Repositories.FranchiseRepository;
 using boomerio.DTOs.FranchiseDTOs;
 using boomerio.Models;
+using boomerio.Repositories.FranchiseRepository;
 
 namespace boomerio.Services.FranchiseService
 {
@@ -34,10 +34,7 @@ namespace boomerio.Services.FranchiseService
             return ToDto(franchise);
         }
 
-        public FranchiseDto ToDto(FranchiseModel franchise) => new FranchiseDto
-        {
-            Id = franchise.Id,
-            Name = franchise.Name,
-        };
+        public FranchiseDto ToDto(FranchiseModel franchise) =>
+            new FranchiseDto { Id = franchise.Id, Name = franchise.Name };
     }
 }

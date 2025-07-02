@@ -19,6 +19,15 @@ namespace boomerio.Controllers
         public async Task<ActionResult<QuoteDto>> GetRandomQuote()
         {
             var quote = await _quoteService.GetRandomQuote();
+            if (quote == null)
+            {
+                return NotFound(new
+                {
+                    type = "NotFound",
+                    status = 404,
+                    message = "No quotes available in the system."
+                });
+            }
             return Ok(quote);
         }
 
@@ -32,6 +41,15 @@ namespace boomerio.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<QuoteDto>> GetById(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(new
+                {
+                    type = "BadRequest",
+                    status = 400,
+                    message = "ID must be greater than zero."
+                });
+            }
             var quote = await _quoteService.GetById(id);
             if (quote == null)
             {
@@ -48,6 +66,15 @@ namespace boomerio.Controllers
         [HttpGet("character/{idCharacter}")]
         public async Task<ActionResult<List<QuoteDto>>> GetByCharacterId(int idCharacter)
         {
+            if (idCharacter <= 0)
+            {
+                return BadRequest(new
+                {
+                    type = "BadRequest",
+                    status = 400,
+                    message = "Character ID must be greater than zero."
+                });
+            }
             var quotes = await _quoteService.GetByCharacterId(idCharacter);
             if (quotes == null || !quotes.Any())
             {

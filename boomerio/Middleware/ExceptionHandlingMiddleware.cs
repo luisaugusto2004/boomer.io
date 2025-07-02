@@ -6,7 +6,11 @@
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
         private readonly IWebHostEnvironment _env;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, IWebHostEnvironment env)
+        public ExceptionHandlingMiddleware(
+            RequestDelegate next,
+            ILogger<ExceptionHandlingMiddleware> logger,
+            IWebHostEnvironment env
+        )
         {
             _next = next;
             _logger = logger;
@@ -27,16 +31,15 @@
 
                 if (_env.IsDevelopment())
                 {
-                    var response = new
-                    {
-                        message = ex.Message,
-                        stackTrace = ex.StackTrace
-                    };
+                    var response = new { message = ex.Message, stackTrace = ex.StackTrace };
                     await context.Response.WriteAsJsonAsync(response);
                 }
                 else
                 {
-                    var response = new { message = "An unexpected error occurred. Please try again later." };
+                    var response = new
+                    {
+                        message = "An unexpected error occurred. Please try again later.",
+                    };
                     await context.Response.WriteAsJsonAsync(response);
                 }
             }

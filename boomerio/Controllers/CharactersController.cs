@@ -8,7 +8,6 @@ namespace boomerio.Controllers
     [ApiController]
     public class CharactersController : ControllerBase
     {
-
         public readonly ICharacterService _characterService;
 
         public CharactersController(ICharacterService characterService)
@@ -29,12 +28,14 @@ namespace boomerio.Controllers
             var character = await _characterService.GetById(id);
             if (character == null)
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "Character not found."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "Character not found.",
+                    }
+                );
             }
             return Ok(character);
         }
@@ -45,12 +46,14 @@ namespace boomerio.Controllers
             var characters = await _characterService.GetByFranchiseId(idFranchise);
             if (characters == null || !characters.Any())
             {
-                return NotFound(new
-                {
-                    type = "NotFound",
-                    status = 404,
-                    message = "No characters found for this franchise."
-                });
+                return NotFound(
+                    new
+                    {
+                        type = "NotFound",
+                        status = 404,
+                        message = "No characters found for this franchise.",
+                    }
+                );
             }
             return Ok(characters);
         }

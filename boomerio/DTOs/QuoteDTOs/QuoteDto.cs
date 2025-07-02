@@ -1,4 +1,6 @@
-﻿namespace boomerio.DTOs.QuoteDTOs
+﻿using System.Text.Json.Serialization;
+
+namespace boomerio.DTOs.QuoteDTOs
 {
     public class QuoteDto
     {
@@ -9,5 +11,8 @@
         public string IconUrl { get; set; } = string.Empty;
         public string Character { get; set; } = string.Empty;
         public string Value { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public int CharacterId { get; set; }
     }
 }

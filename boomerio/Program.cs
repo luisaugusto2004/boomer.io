@@ -36,12 +36,15 @@ namespace boomerio
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
         }
-        private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+
+        private static void ConfigureServices(
+            IServiceCollection services,
+            IConfiguration configuration
+        )
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
@@ -57,13 +60,12 @@ namespace boomerio
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("BoomerShooterDb")));
+                options.UseSqlServer(configuration.GetConnectionString("BoomerShooterDb"))
+            );
         }
     }
 }

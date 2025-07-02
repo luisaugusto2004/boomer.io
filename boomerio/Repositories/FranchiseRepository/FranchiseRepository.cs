@@ -15,7 +15,9 @@ namespace boomerio.Repositories.FranchiseRepository
 
         public async Task<FranchiseModel?> GetById(int id)
         {
-            return await _context.Franchises.Include(f => f.Characters).FirstOrDefaultAsync(f => f.Id == id);
+            return await _context
+                .Franchises.Include(f => f.Characters)
+                .FirstOrDefaultAsync(f => f.Id == id);
         }
 
         public async Task<List<FranchiseModel>> GetAll()

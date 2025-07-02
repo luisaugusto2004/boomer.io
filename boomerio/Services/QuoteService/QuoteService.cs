@@ -60,6 +60,7 @@ namespace boomerio.Services.QuoteService
             UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
             Franchise = quote.Character.Franchise.Name,
             IconUrl = quote.Character.Franchise.IconUrl,
+            CharacterId = quote.Character.Id,
             Character = quote.Character.Name,
             Value = quote.QuoteText
         };

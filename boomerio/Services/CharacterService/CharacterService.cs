@@ -6,7 +6,6 @@ namespace boomerio.Services.CharacterService
 {
     public class CharacterService : ICharacterService
     {
-
         public readonly ICharacterRepository _characterRepository;
 
         public CharacterService(ICharacterRepository characterRepository)
@@ -47,11 +46,12 @@ namespace boomerio.Services.CharacterService
             return characters.Select(ToDto).ToList();
         }
 
-        public CharacterDto ToDto(CharacterModel character) => new CharacterDto
-        {
-            Id = character.Id,
-            Franchise = character.Franchise.Name,
-            Name = character.Name
-        };
+        public CharacterDto ToDto(CharacterModel character) =>
+            new CharacterDto
+            {
+                Id = character.Id,
+                Franchise = character.Franchise.Name,
+                Name = character.Name,
+            };
     }
 }
