@@ -25,6 +25,17 @@ namespace boomerio.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDto>> GetById(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "Invalid character ID.",
+                    }
+                );
+            }
             var character = await _characterService.GetById(id);
             if (character == null)
             {
@@ -43,6 +54,17 @@ namespace boomerio.Controllers
         [HttpGet("franchise/{idFranchise}")]
         public async Task<ActionResult<List<CharacterDto>>> GetByFranchiseId(int idFranchise)
         {
+            if (idFranchise <= 0)
+            {
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "Invalid franchise ID.",
+                    }
+                );
+            }
             var characters = await _characterService.GetByFranchiseId(idFranchise);
             if (characters == null || !characters.Any())
             {

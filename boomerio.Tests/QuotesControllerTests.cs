@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace boomerio.Tests
 {
-    public class QuoteServiceTests
+    public class QuotesControllerTests
     {
         [Fact]
         public async Task GetRandomQuote_ReturnsExpectedQuote()
@@ -348,6 +348,93 @@ namespace boomerio.Tests
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetById_ReturnsExpectedQuote_WhenIdIsRight()
+        {
+            // Arrange
+            int id = 1;
+            QuoteDto expected = new QuoteDto
+            {
+                Id = 1,
+                Character = "Character 1",
+                CreatedAt = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
+                UpdatedAt = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
+                CharacterId = 1,
+                Value = "Quote 1",
+            };
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetById(id)).Returns(Task.FromResult<QuoteDto?>(expected));
+            var controller = new QuotesController(fakeService);
+            // Act
+            var result = await controller.GetById(id);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetById_ReturnsNotFound_WhenIdQuoteDoesNotExist()
+        {
+            // Arrange
+            int id = 2;
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetById(id)).Returns(Task.FromResult<QuoteDto?>(null));
+            var controller = new QuotesController(fakeService);
+            // Act
+            var result = await controller.GetById(id);
+
+            // Assert
+            var okResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetById_ReturnsBadRequest_WhenIdIsZeroOrNegative()
+        {
+            var fakeService = A.Fake<IQuoteService>();
+            var controller = new QuotesController(fakeService);
+            // Act
+            var zeroResult = await controller.GetById(0);
+            var negativeResult = await controller.GetById(-1);
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(zeroResult.Result);
+            Assert.IsType<BadRequestObjectResult>(negativeResult.Result);
+        }
+
+        [Fact]
+        public async Task GetAll_ReturnsExpectedQuotes()
+        {
+            // Arrange
+            List<QuoteDto> expected = new List<QuoteDto>
+            {
+                new QuoteDto { Value = "Quote 1", Character = "Character 1" },
+                new QuoteDto { Value = "Quote 2", Character = "Character 2" },
+            };
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult(expected));
+            var controller = new QuotesController(fakeService);
+            // Act
+            var result = await controller.GetAll();
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var returnedQuotes = Assert.IsType<List<QuoteDto>>(okResult.Value);
+            returnedQuotes.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public async Task GetAll_ReturnsEmptyList_WhenNoQuotes()
+        {
+            // Arrange
+            var fakeService = A.Fake<IQuoteService>();
+            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult(new List<QuoteDto>()));
+            var controller = new QuotesController(fakeService);
+            // Act
+            var result = await controller.GetAll();
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var returnedQuotes = Assert.IsType<List<QuoteDto>>(okResult.Value);
+            returnedQuotes.Should().BeEmpty();
         }
     }
 }

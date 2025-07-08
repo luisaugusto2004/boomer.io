@@ -25,6 +25,17 @@ namespace boomerio.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FranchiseDto>> GetById(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(
+                    new
+                    {
+                        type = "BadRequest",
+                        status = 400,
+                        message = "Invalid franchise ID.",
+                    }
+                );
+            }
             var franchise = await _franchiseService.GetById(id);
             if (franchise == null)
             {

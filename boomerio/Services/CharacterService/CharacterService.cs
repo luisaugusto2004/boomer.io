@@ -52,6 +52,7 @@ namespace boomerio.Services.CharacterService
                 Id = character.Id,
                 Franchise = character.Franchise.Name,
                 Name = character.Name,
+                FranchiseId = character.Franchise.Id,
             };
     }
 }
