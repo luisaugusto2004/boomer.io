@@ -1,5 +1,6 @@
 using System.Reflection;
 using boomerio.Data;
+using boomerio.DTOs;
 using boomerio.Middleware;
 using boomerio.Repositories.CharacterRepository;
 using boomerio.Repositories.FranchiseRepository;
@@ -7,6 +8,7 @@ using boomerio.Repositories.QuoteRepository;
 using boomerio.Services.CharacterService;
 using boomerio.Services.FranchiseService;
 using boomerio.Services.QuoteService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -60,17 +62,26 @@ namespace boomerio
                     {
                         Title = "Boomer Shooter API",
                         Version = "v1",
-                        Description = "API for Boomer Shooter Quotes",
+                        Description = "API for Boomer Shooter Quotes, Characters and Franchises",
                     }
                 );
             });
-
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = context =>
+                {
+                    return new BadRequestObjectResult(
+                        new ApiError("BadRequest", 400, "One or more validation errors occurred.")
+                    );
+                };
+            });
             services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddScoped<IQuoteService, QuoteService>();
             services.AddScoped<ICharacterRepository, CharacterRepository>();
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IFranchiseRepository, FranchiseRepository>();
             services.AddScoped<IFranchiseService, FranchiseService>();
+            // Add CORS policy to allow front end requests
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
