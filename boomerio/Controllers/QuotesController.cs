@@ -25,7 +25,7 @@ namespace boomerio.Controllers
         /// <response code="500">If an internal server error occurs.</response>
         [ProducesResponseType(typeof(QuoteDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
         [HttpGet("random")]
         public async Task<ActionResult<QuoteDto>> GetRandomQuote()
         {
@@ -46,7 +46,7 @@ namespace boomerio.Controllers
         /// <response code="200">Returns a list of quotes.</response>
         /// <response code="500">If an internal server error occurs.</response>
         [ProducesResponseType(typeof(List<QuoteDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<ActionResult<List<QuoteDto>>> GetAll()
         {
@@ -65,7 +65,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(QuoteDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<ActionResult<QuoteDto>> GetById(int id)
         {
@@ -92,7 +92,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(List<QuoteDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
         [HttpGet("character/{idCharacter}")]
         public async Task<ActionResult<List<QuoteDto>>> GetByCharacterId(int idCharacter)
         {
@@ -128,7 +128,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(List<QuoteDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
         [HttpGet("search")]
         public async Task<ActionResult<List<QuoteDto>>> GetByQuery([FromQuery] string query)
         {
