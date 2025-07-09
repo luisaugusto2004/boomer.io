@@ -1,3 +1,4 @@
+using System.Reflection;
 using boomerio.Data;
 using boomerio.Middleware;
 using boomerio.Repositories.CharacterRepository;
@@ -7,6 +8,7 @@ using boomerio.Services.CharacterService;
 using boomerio.Services.FranchiseService;
 using boomerio.Services.QuoteService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace boomerio
 {
@@ -47,7 +49,21 @@ namespace boomerio
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+                options.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Boomer Shooter API",
+                        Version = "v1",
+                        Description = "API for Boomer Shooter Quotes",
+                    }
+                );
+            });
 
             services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddScoped<IQuoteService, QuoteService>();

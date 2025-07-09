@@ -1,4 +1,5 @@
 ﻿using boomerio.Controllers;
+using boomerio.DTOs;
 using boomerio.DTOs.QuoteDTOs;
 using boomerio.Services.QuoteService;
 using FakeItEasy;
@@ -136,16 +137,10 @@ namespace boomerio.Tests
 
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result.Result);
 
-            var value = notFoundResult.Value;
-
-            var dict = value!
-                .GetType()
-                .GetProperties()
-                .ToDictionary(p => p.Name, p => p.GetValue(value, null));
-
-            dict["type"].Should().Be("NotFound");
-            dict["status"].Should().Be(404);
-            dict["message"].Should().Be("No quotes available in the system.");
+            var apiError = Assert.IsType<ApiError>(notFoundResult.Value);
+            Assert.Equal("NotFound", apiError.Type);
+            Assert.Equal(404, apiError.Status);
+            Assert.Equal("No quotes available at the moment.", apiError.Message);
         }
 
         [Fact]

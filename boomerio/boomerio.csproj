@@ -3,6 +3,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
     <RootNamespace>boomerio</RootNamespace>
     <UserSecretsId>d31a61fb-7115-478d-a31a-ad36b7f45b6c</UserSecretsId>
   </PropertyGroup>
