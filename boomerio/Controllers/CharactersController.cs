@@ -23,7 +23,7 @@ namespace boomerio.Controllers
         /// <response code="200">Returns a list of characters.</response>
         /// <response code="500">If an internal server error occurs.</response>
         [ProducesResponseType(typeof(List<CharacterDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<ActionResult<List<CharacterDto>>> GetAllAsync()
         {
@@ -42,7 +42,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(CharacterDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDto>> GetById(int id)
         {
@@ -71,7 +71,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(List<CharacterDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ApiError), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("franchise/{idFranchise}")]
         public async Task<ActionResult<List<CharacterDto>>> GetByFranchiseId(int idFranchise)
         {
