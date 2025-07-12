@@ -10,6 +10,7 @@ using boomerio.Services.FranchiseService;
 using boomerio.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 namespace boomerio
@@ -24,20 +25,38 @@ namespace boomerio
 
             ConfigureServices(builder.Services, builder.Configuration);
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                var isDocker = builder.Environment.IsEnvironment("Docker");
+                var connectionStringName = isDocker ? "DefaultConnection" : "BoomerShooterDb";
+                Console.WriteLine($"[DB] Environment: {builder.Environment.EnvironmentName}");
+                Console.WriteLine($"[DB] Using connection string: {connectionStringName}");
+                options.UseSqlServer(builder.Configuration.GetConnectionString(connectionStringName));
+            });
+
             var app = builder.Build();
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseCors();
+            app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            if (!app.Environment.IsEnvironment("Docker"))
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseAuthorization();
+
+            using(var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                context.Database.Migrate();
+            }
 
             app.MapControllers();
 
@@ -84,14 +103,11 @@ namespace boomerio
             // Add CORS policy to allow front end requests
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(policy =>
+                options.AddPolicy("AllowAll", policy =>
                 {
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("BoomerShooterDb"))
-            );
         }
     }
 }

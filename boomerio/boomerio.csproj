@@ -9,6 +9,7 @@
     <UserSecretsId>d31a61fb-7115-478d-a31a-ad36b7f45b6c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.15" />

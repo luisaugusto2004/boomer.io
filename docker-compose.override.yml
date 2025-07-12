@@ -1,0 +1,14 @@
+services:
+  boomerio:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "8080"
+    # These volumes are optional and only needed for local HTTPS and secrets.
+    # If you're using Linux/macOS or not relying on HTTPS dev certs, you can comment them out.
+    #volumes:
+    #  - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+    #  - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    #  - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    #  - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

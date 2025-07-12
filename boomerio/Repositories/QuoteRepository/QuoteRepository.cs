@@ -40,13 +40,13 @@ namespace boomerio.Repositories.QuoteRepository
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
 
-        public async Task<QuoteModel> GetRandomQuote()
+        public async Task<QuoteModel?> GetRandomQuote()
         {
             int count = await _context.Quotes.CountAsync();
 
             if (count == 0)
             {
-                throw new InvalidOperationException("No quotes available");
+                return null;
             }
             int index = RandomNumberGenerator.GetInt32(_context.Quotes.Count());
 

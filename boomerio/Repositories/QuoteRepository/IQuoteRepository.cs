@@ -7,7 +7,7 @@ namespace boomerio.Repositories.QuoteRepository
         Task<List<QuoteModel>> GetAllAsync();
         Task<QuoteModel?> GetByIdAsync(int id);
         Task<List<QuoteModel>> GetByCharacterId(int idCharacter);
-        Task<QuoteModel> GetRandomQuote();
+        Task<QuoteModel?> GetRandomQuote();
         Task<List<QuoteModel>> GetByQueryAsync(string query);
     }
 }
