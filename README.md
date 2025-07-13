@@ -107,7 +107,7 @@ npx serve frontend
 ## Future Plans
 
 - [x] Add Unit Tests (xUnit)
-- [ ]Implement integration tests to ensure end-to-end API functionality and reliability
+- [ ] Implement integration tests to ensure end-to-end API functionality and reliability
 - [ ] Deploy backend to Azure / Railway
 - [ ] Host static frontend (GitHub Pages / Vercel)
 
