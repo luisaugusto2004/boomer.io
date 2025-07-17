@@ -31,7 +31,7 @@ namespace boomerio
                 var connectionStringName = isDocker ? "DefaultConnection" : "BoomerShooterDb";
                 Console.WriteLine($"[DB] Environment: {builder.Environment.EnvironmentName}");
                 Console.WriteLine($"[DB] Using connection string: {connectionStringName}");
-                options.UseSqlServer(builder.Configuration.GetConnectionString(connectionStringName));
+                options.UseSqlite(builder.Configuration.GetConnectionString(connectionStringName));
             });
 
             var app = builder.Build();

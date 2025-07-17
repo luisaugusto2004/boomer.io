@@ -16,7 +16,7 @@ namespace boomerio.Services.QuoteService
         public async Task<List<QuoteDto>> GetAll()
         {
             var quotes = await _quoteRepository.GetAllAsync();
-            return quotes.Select(ToDto).ToList();
+            return quotes.Select(ToDto).OrderBy(c => c.Character).ToList();
         }
 
         public async Task<List<QuoteDto>> GetByCharacterId(int idCharacter)
@@ -57,8 +57,8 @@ namespace boomerio.Services.QuoteService
             new QuoteDto
             {
                 Id = quote.Id,
-                CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
-                UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss.ffffff"),
+                CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
+                UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
                 Franchise = quote.Character.Franchise.Name,
                 IconUrl = quote.Character.Franchise.IconUrl,
                 CharacterId = quote.Character.Id,

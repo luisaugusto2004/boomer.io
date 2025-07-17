@@ -1,27 +1,39 @@
 # Boomer.io - Boomer Shooter Quotes API
 
-A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g., **Blood**, **Duke Nukem 3D**), built with **ASP.NET Core** and **SQL Server** — with a minimal static frontend for testing.
+![License](https://img.shields.io/github/license/luisaugusto2004/boomer.io)
+![.NET](https://img.shields.io/badge/.NET%208-512bd4?logo=dotnet&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
+
+A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g., **Blood**, **Duke Nukem 3D**), built with **ASP.NET Core** and **SQLite** — with a minimal static frontend for testing.
 
 ---
 
 ## Features
 
-- Get random quotes (`/api/Quotes/random`)
-- Get all quotes (`/api/Quotes`)
-- Get all available characters (`/api/Characters`)
-- Get all available franchises (`/api/Franchises`)
-- Simple frontend (HTML/JS) to test API endpoints
-- Docker support with containerized database via Docker Compose
-- And more!
+- 🎯 Random quote endpoint (`/api/Quotes/random`)
+- 📜 Full quote list (`/api/Quotes`)
+- 🧍 Character and franchise listings
+- 🌐 Simple frontend (HTML/JS) to test endpoints
+- 🐳 Docker support via Docker Compose
+- 📦 SQLite + EF Core migrations for local DB
 
 ---
 
 ## Tech Stack
 
 - **Backend:** ASP.NET Core 8 Web API
-- **ORM:** Entity Framework Core + SQL Server
+- **ORM:** Entity Framework Core + SQLite
 - **Frontend:** Vanilla HTML + JavaScript + CSS (no frameworks)
 - **API Docs:** Swagger
+
+## Build database
+
+1. Run the following command to apply migrations and generate the SQLite database:
+
+```bash
+dotnet ef database update
+```
 
 ## Docker
 
@@ -31,29 +43,32 @@ This project includes Docker and Docker Compose support for easy setup and deplo
 
 Make sure you have Docker and Docker Compose installed.
 
-1. Copy `.env.example` to `.env` and set your environment variables (e.g., `SA_PASSWORD`).
-2. Run the containers:
+1. Run the containers:
 
 ```bash
 docker-compose up --build
 ```
 
+**Url:**
+
+- App running at: [http://localhost:8080](http://localhost:8080)
+
 ---
 
 ## API Endpoints
 
-| Method | Route                                 | Description                                           |
-| ------ | ------------------------------------- | ----------------------------------------------------- |
-| GET    | `/api/Quotes/random`                  | Get a random quote                                    |
-| GET    | `/api/Quotes`                         | Get all quotes                                        |
-| GET    | `/api/Quotes/{id}`                    | Get quote by ID                                       |
-| GET    | `/api/Quotes/character/{idCharacter}` | Get quotes for a specific character                   |
-| GET    | `/api/Quotes/search`                  | Get quotes filtered by a query                        |
-| GET    | `/api/Characters`                     | Get all characters                                    |
-| GET    | `/api/Characters/{id}`                | Get character by ID                                   |
-| GET    | `/api/Characters/{idFranchise}`       | Get characters filtered by their respective franchise |
-| GET    | `/api/Franchises`                     | Get all franchises                                    |
-| GET    | `/api/Franchises/{id}`                | Get franchise by ID                                   |
+| Method | Route                                     | Description                                           |
+| ------ | ----------------------------------------- | ----------------------------------------------------- |
+| GET    | `/api/Quotes/random`                      | Get a random quote                                    |
+| GET    | `/api/Quotes`                             | Get all quotes                                        |
+| GET    | `/api/Quotes/{id}`                        | Get quote by ID                                       |
+| GET    | `/api/Quotes/character/{idCharacter}`     | Get quotes for a specific character                   |
+| GET    | `/api/Quotes/search`                      | Get quotes filtered by a query                        |
+| GET    | `/api/Characters`                         | Get all characters                                    |
+| GET    | `/api/Characters/{id}`                    | Get character by ID                                   |
+| GET    | `/api/Characters/franchise/{idFranchise}` | Get characters filtered by their respective franchise |
+| GET    | `/api/Franchises`                         | Get all franchises                                    |
+| GET    | `/api/Franchises/{id}`                    | Get franchise by ID                                   |
 
 ---
 
@@ -68,7 +83,7 @@ dotnet run
 ```
 
 API available at:  
-`https://localhost:7239/swagger`
+[https://localhost:7239](https://localhost:7239)
 
 ---
 
@@ -86,14 +101,34 @@ npx serve frontend
 
 ## Database
 
-- **SQL Server** (LocalDB or full version)
-- Auto-generated tables via Entity Framework migrations
-- Quote Columns:
-  - `Id`
-  - `QuoteText`
-  - `CharacterId` (FK)
-  - `CreatedAt`
-  - `UpdatedAt`
+- **SQLite** (LocalDB or full version)
+- Database auto-generated via Entity Framework migrations
+
+### Schema Overview
+
+**Quote**
+
+- `Id`
+- `QuoteText`
+- `CharacterId` (FK)
+- `CreatedAt`
+- `UpdatedAt`
+
+**Character**
+
+- `Id`
+- `Name`
+- `FranchiseId` (FK)
+
+**Franchise**
+
+- `Id`
+- `Name`
+- `IconUrl`
+
+### Database Diagram
+
+![Database Diagram](docs/BoomerDB.png)
 
 ---
 
