@@ -8,7 +8,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Data Source=data/boomerio.sqlite;
+      - ConnectionStrings__DefaultConnection=Data Source=boomerio.sqlite;
     networks:
       - boomerio-network
     restart: on-failure

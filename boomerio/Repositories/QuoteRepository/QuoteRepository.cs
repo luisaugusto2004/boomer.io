@@ -60,6 +60,7 @@ namespace boomerio.Repositories.QuoteRepository
             return quote;
         }
 
+        // TODO: Implement ToLower() function to query and quote value(not now and idk when)
         public async Task<List<QuoteModel>> GetByQueryAsync(string query)
         {
             return await _context

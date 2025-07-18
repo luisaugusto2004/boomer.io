@@ -4,7 +4,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-RUN mkdir -p /app/data && chmod -R 777 /app/data
 EXPOSE 8080
 
 # This stage is used to build the service project
@@ -12,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["boomerio.csproj", "."]
-COPY ["boomerio.sqlite", "./data/"]
+COPY ["boomerio.sqlite", "."]
 RUN dotnet restore "./boomerio.csproj"
 COPY . .
 WORKDIR "/src/."
@@ -27,5 +26,5 @@ RUN dotnet publish "./boomerio.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=build /src/data/boomerio.sqlite ./data/boomerio.sqlite
+COPY --from=build /src/boomerio.sqlite ./boomerio.sqlite
 ENTRYPOINT ["dotnet", "boomerio.dll"]

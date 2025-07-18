@@ -5,11 +5,15 @@ using boomerio.Middleware;
 using boomerio.Repositories.CharacterRepository;
 using boomerio.Repositories.FranchiseRepository;
 using boomerio.Repositories.QuoteRepository;
+using boomerio.Services.Cache.CharactersCache;
+using boomerio.Services.Cache.FranchisesCache;
+using boomerio.Services.Cache.QuotesCache;
 using boomerio.Services.CharacterService;
 using boomerio.Services.FranchiseService;
 using boomerio.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
@@ -20,7 +24,7 @@ namespace boomerio
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+    
             // Add services to the container.
 
             ConfigureServices(builder.Services, builder.Configuration);
@@ -29,8 +33,6 @@ namespace boomerio
             {
                 var isDocker = builder.Environment.IsEnvironment("Docker");
                 var connectionStringName = isDocker ? "DefaultConnection" : "BoomerShooterDb";
-                Console.WriteLine($"[DB] Environment: {builder.Environment.EnvironmentName}");
-                Console.WriteLine($"[DB] Using connection string: {connectionStringName}");
                 options.UseSqlite(builder.Configuration.GetConnectionString(connectionStringName));
             });
 
@@ -95,11 +97,35 @@ namespace boomerio
                 };
             });
             services.AddScoped<IQuoteRepository, QuoteRepository>();
-            services.AddScoped<IQuoteService, QuoteService>();
             services.AddScoped<ICharacterRepository, CharacterRepository>();
-            services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IFranchiseRepository, FranchiseRepository>();
-            services.AddScoped<IFranchiseService, FranchiseService>();
+
+            services.AddScoped<QuoteService>();
+            services.AddScoped<CharacterService>();
+            services.AddScoped<FranchiseService>();
+
+            services.AddScoped<IQuoteService>(provider =>
+            {
+                var realService = provider.GetService<QuoteService>()!;
+                var cache = provider.GetRequiredService<IMemoryCache>();
+                return new QuoteCacheService(realService, cache);
+            });
+
+            services.AddScoped<ICharacterService>(provider =>
+            {
+                var realService = provider.GetService<CharacterService>()!;
+                var cache = provider.GetRequiredService<IMemoryCache>();
+                return new CharactersCacheService(realService, cache);
+            });
+
+            services.AddScoped<IFranchiseService>(provider =>
+            {
+                var realService = provider.GetService<FranchiseService>()!;
+                var cache = provider.GetRequiredService<IMemoryCache>();
+                return new FranchiseCacheService(realService, cache);
+            });
+
+
             // Add CORS policy to allow front end requests
             services.AddCors(options =>
             {
@@ -108,6 +134,7 @@ namespace boomerio
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
+            services.AddMemoryCache();
         }
     }
 }
