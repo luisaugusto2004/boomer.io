@@ -33,7 +33,7 @@ namespace boomerio.Services.FranchiseService
             }
             return ToDto(franchise);
         }
-
+        // TODO: Implement IconUrl in FranchiseDto and set it in the ToDto method
         public FranchiseDto ToDto(FranchiseModel franchise) =>
             new FranchiseDto { Id = franchise.Id, Name = franchise.Name };
     }
