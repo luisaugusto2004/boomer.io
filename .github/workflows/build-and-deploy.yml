@@ -23,7 +23,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore boomerio/boomerio.csproj
+        run: dotnet restore boomerio/boomerio.csproj --runtime win-x86
 
       - name: Build
         run: dotnet build boomerio/boomerio.csproj --no-restore --configuration Release
