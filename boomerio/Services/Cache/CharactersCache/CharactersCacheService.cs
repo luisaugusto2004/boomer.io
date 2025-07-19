@@ -16,7 +16,7 @@ namespace boomerio.Services.Cache.CharactersCache
             _cache = cache;
             _cacheOptions = new MemoryCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
             };
         }
 

@@ -14,7 +14,6 @@ using boomerio.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 namespace boomerio
@@ -24,7 +23,7 @@ namespace boomerio
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-    
+
             // Add services to the container.
 
             ConfigureServices(builder.Services, builder.Configuration);
@@ -41,7 +40,7 @@ namespace boomerio
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+            if (!app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -54,7 +53,7 @@ namespace boomerio
 
             app.UseAuthorization();
 
-            using(var scope = app.Services.CreateScope())
+            using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 context.Database.Migrate();
