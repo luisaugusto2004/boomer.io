@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  AZURE_WEB_APP_NAME: boomerio
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore boomerio/boomerio.csproj
+
+      - name: Build
+        run: dotnet build boomerio/boomerio.csproj --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test boomerio/boomerio.csproj --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish boomerio/boomerio.csproj --no-build --configuration Release --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+
+      - name: Deploy
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEB_APP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
