@@ -4,6 +4,7 @@
 ![.NET](https://img.shields.io/badge/.NET%208-512bd4?logo=dotnet&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
+[![pages-build-deployment](https://github.com/luisaugusto2004/boomer.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/luisaugusto2004/boomer.io/actions/workflows/pages/pages-build-deployment)
 
 A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g., **Blood**, **Duke Nukem 3D**), built with **ASP.NET Core** and **SQLite** — with a minimal static frontend for testing.
 
@@ -17,8 +18,19 @@ A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g
 - 🌐 Simple frontend (HTML/JS) to test endpoints
 - 🐳 Docker support via Docker Compose
 - 📦 SQLite + EF Core migrations for local DB
+- ⚡ Query caching for improved performance on high-traffic endpoints
 
+### Performance
+
+- In-memory cache added to speed up frequent requests:
+  - `/api/Quotes` → Caches full quote list
+  - `/api/Characters` and `/api/Franchises` also cached
 ---
+
+## Live Demo
+
+- 🔗 API Live: [https://boomerio.azurewebsites.net/](https://boomerio.azurewebsites.net/)
+- 🌍 Frontend Demo: [https://luisaugusto2004.github.io/boomer.io/](https://luisaugusto2004.github.io/boomer.io/)
 
 ## Tech Stack
 
@@ -144,7 +156,7 @@ npx serve frontend
 - [x] Add Unit Tests (xUnit)
 - [ ] Implement integration tests to ensure end-to-end API functionality and reliability
 - [x] Deploy backend to Azure / Railway
-- [ ] Host static frontend (GitHub Pages / Vercel)
+- [x] Host static frontend (GitHub Pages / Vercel)
 
 ---
 
@@ -153,3 +165,7 @@ npx serve frontend
 Inspired by classic 90's shooters — a tribute to **Duke Nukem**, **Blood**, **Serious Sam** and more.
 
 Made with love by Luis.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
