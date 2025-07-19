@@ -1,0 +1,17 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      version: "8.0.x"
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    secrets:
+      AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE }}

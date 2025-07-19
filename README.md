@@ -4,6 +4,7 @@
 ![.NET](https://img.shields.io/badge/.NET%208-512bd4?logo=dotnet&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
+[![Azure Static Web Apps CI/CD](https://github.com/luisaugusto2004/boomer.io/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/USERNAME/REPO_NAME/actions/workflows/build-and-deploy.yml)
 [![pages-build-deployment](https://github.com/luisaugusto2004/boomer.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/luisaugusto2004/boomer.io/actions/workflows/pages/pages-build-deployment)
 
 A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g., **Blood**, **Duke Nukem 3D**), built with **ASP.NET Core** and **SQLite** — with a minimal static frontend for testing.
@@ -24,6 +25,7 @@ A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g
 
 - In-memory cache added to speed up frequent requests:
   - `/api/Quotes` → Caches full quote list
+  - `/api/Quotes/character` -> Caches full character quote list
   - `/api/Characters` and `/api/Franchises` also cached
 ---
 
