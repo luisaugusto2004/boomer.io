@@ -32,7 +32,7 @@ jobs:
         run: dotnet test boomerio/boomerio.csproj --no-build --verbosity normal
 
       - name: Publish
-        run: dotnet publish boomerio/boomerio.csproj --no-build --configuration Release --runtime win-x86 --self-contained true --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+        run: dotnet publish boomerio/boomerio.csproj --configuration Release --runtime win-x86 --self-contained true --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
 
       - name: Deploy
         uses: azure/webapps-deploy@v2
