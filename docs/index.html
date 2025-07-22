@@ -1,148 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Boomer.io</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="icon" href="Assets/icon.png" type="image/png"/>
-    <style>
-      body {
-        background-color: #1a1a1a;
-        color: #ff3333;
-        font-family: monospace;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-        margin: 0;
-      }
-      p {
-        font-size: 15px;
-        font-weight: bold;
-      }
-      .container {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      .content {
-        text-align: left;
-        padding-left: 50px;
-      }
-      h1 {
-        color: #ffa500;
-        text-align: left;
-        font-family: "Pixelify Sans", sans-serif;
-        margin-bottom: 20px;
-      }
-      .quote-box {
-        margin-top: 20px;
-        padding: 15px;
-        border: 2px solid #ff3333;
-        background-color: #000000;
-        text-align: left;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        max-height: 600px;
-        overflow-y: auto;
-        border-radius: 8px;
-        color: #ff3333;
-      }
-      #Logo {
-        width: 400px;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-        max-width: 100%;
-        height: auto;
-        margin-top: 50px;
-      }
-      #endpoints {
-        font-weight: bold;
-        margin-top: 20px;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-      li {
-        margin: 5px 0;
-        color: #ff6666;
-      }
-      .site-footer {
-        background-color: transparent;
-        color: #999999;
-        padding: 20px;
-        margin-top: 40px;
-        border-top: 1px solid #333333;
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-      }     
-      .site-footer p {
-        margin: 5px 0;
-        font-size: 0.9em;
-      }
-      .site-footer .footer-links a {
-        color: #ff6666;
-        text-decoration: none;
-        margin: 0 1px;
-        transition: color 0.3s ease;
-      }
-      .site-footer .footer-links a:hover {
-        color: #ff0000;
-        text-decoration: underline;
-      }
-      pre {
-        font-size: 14px;
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <img src="Assets/boomer_logo.png" id="Logo" alt="Boomer Shooter Logo" />
-      <div class="content">
-        <h1>Boomer Shooter Quotes API</h1>
-        <p style="color: #ffcc00;text-align: left;">
-          Looking for badass one-liners from classic boomer shooters?<br/>
-          This free API serves quotes straight from the golden age of FPS
-          games.<br/>
-          Built for fans, devs, and retro maniacs alike!
-        </p>
 
-        <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
-          Usage
-        </h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>Boomer.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="icon" href="Assets/icon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css">
+</head>
 
-        <p>
-          Retrieve a random quote from a classic boomer shooter game in JSON
-          format.
-        </p>
+<body>
+  <div class="container">
+    <img src="Assets/boomer_logo.png" id="Logo" alt="Boomer Shooter Logo" />
+    <div class="content">
+      <h1>Boomer Shooter Quotes API</h1>
+      <p style="color: #ffcc00;text-align: left;">
+        Looking for badass one-liners from classic boomer shooters?<br />
+        This free API serves quotes straight from the golden age of FPS
+        games.<br />
+        Built for fans, devs, and retro maniacs alike!
+      </p>
 
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px; font-weight: bold;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Quotes/random" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/random</a></pre>
+      <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
+        Usage
+      </h2>
 
-        <p>Example response:</p>
+      <p>
+        Retrieve a random quote from a classic boomer shooter game in JSON
+        format.
+      </p>
 
-        <pre class="quote-box" id="output"></pre>
-          <a href="#!" onclick="getRandomQuote()" style="color: red">
-            Get me a new one...
-          </a>
-        </p>
-        <div id="quoteDisplay"></div> 
-        <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
-          Other Endpoints</h2>
-        <p id="endpoints">Free text search</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Quotes/search?query=bull" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query=bull</a></pre>
-        <p>Example response:</p>
-        <details>
-          <summary style="color: orange; cursor: pointer;">View example response</summary>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px; font-weight: bold;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Quotes/random" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/random</a></pre>
+
+      <p>Example response:</p>
+
+      <pre class="quote-box" id="output"></pre>
+      <a href="#!" onclick="getRandomQuote()" style="color: red">
+        Get me a new one...
+      </a>
+      </p>
+      <div id="quoteDisplay"></div>
+      <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
+        Other Endpoints</h2>
+      <p id="endpoints">Free text search</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Quotes/search?query=bull" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query=bull</a></pre>
+      <p>Example response:</p>
+      <details>
+        <summary style="color: orange; cursor: pointer;">View example response</summary>
         <pre class="quote-box">
 [
   {
@@ -172,14 +83,16 @@
     "character": "Sam Stone",
     "value": "Now that's a lot of flying bull."
   }
-]</pre></details>
-<p id="endpoints">Retrieve quotes filtered by a character</p>
-<pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
->GET <a href="https://boomerio.azurewebsites.net/api/Quotes/character/{characterName}" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}</a></pre>
-        <p>Example response:</p>
-<details>
-  <summary style="color: orange; cursor: pointer;">View example response</summary>
-<pre class="quote-box">
+]</pre>
+      </details>
+      <p id="endpoints">Retrieve quotes filtered by a character</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Quotes/character/{characterName}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}</a></pre>
+      <p>Example response:</p>
+      <details>
+        <summary style="color: orange; cursor: pointer;">View example response</summary>
+        <pre class="quote-box">
 [
   {
     "id": 190,
@@ -209,84 +122,66 @@
     "value": "Say my name!"
   },
   ...
-]</pre></details>
-        <p id="endpoints">Retrieve all quotes in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Quotes" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes</a></pre>
-        
-        <p id="endpoints">Retrive quote by ID in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Quotes/{id}" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/{id}</a></pre>
+]</pre>
+      </details>
+      <p id="endpoints">Retrieve all quotes in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Quotes" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes</a></pre>
 
-        <p id="endpoints">Retrieve all characters in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Characters" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters</a></pre>
+      <p id="endpoints">Retrive quote by ID in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Quotes/{id}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/{id}</a></pre>
 
-        <p id="endpoints">Retrieve character by ID in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Characters/{id}" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/{id}</a></pre>
+      <p id="endpoints">Retrieve all characters in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Characters" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters</a></pre>
 
-        <p id="endpoints">Retrieve characters filtered by franchise</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseName}" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseId}</a></pre>
+      <p id="endpoints">Retrieve character by ID in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Characters/{id}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/{id}</a></pre>
 
-        <p id="endpoints">Retrieve all franchises in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Franchises" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises</a></pre>
+      <p id="endpoints">Retrieve characters filtered by franchise</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseName}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseId}</a></pre>
 
-        <p id="endpoints">Retrieve franchise by ID in JSON</p>
-        <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;"
-        >GET <a href="https://boomerio.azurewebsites.net/api/Franchises/{id}" target="_blank" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises/{id}</a></pre>
-        
-      </div>
+      <p id="endpoints">Retrieve all franchises in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Franchises" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises</a></pre>
 
-      <footer class="site-footer">
-        <p>
-          The Boomer Shooter Quotes API is a free and open-source project<br />
-          designed to provide quotes from classic boomer shooter games.<br />
-          It is not affiliated with any game developers or publishers.<br />
-          All quotes are sourced from various games and are intended<br />
-          for educational and entertainment purposes only.<br />
-          All trademarks and copyrights belong to their respective owners.
-        </p>
-        <p>
-          <br />This project was made with love by a lifelong fan of boomer
-          shooters.<br><br>
-        </p>
-        <div class="footer-links">
-          <a href="https://github.com/luisaugusto2004" target="_blank" rel="noopener noreferrer"
-            >GitHub</a>
-          <a href="https://www.linkedin.com/in/luisaugusto2004/" target="_blank" rel="noopener noreferrer"
-            >Linkedin</a>
-        </div>
-        <p>&copy; 2025 BoomerIO. Developed by Luis.</p>
-      </footer>
+      <p id="endpoints">Retrieve franchise by ID in JSON</p>
+      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
+          href="https://boomerio.azurewebsites.net/api/Franchises/{id}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises/{id}</a></pre>
+
     </div>
-    <script>
-      const baseUrl = "https://boomerio.azurewebsites.net";
 
-      async function getRandomQuote() {
-        try {
-          const response = await fetch(`${baseUrl}/api/quotes/random`);
-          if (!response.ok)
-            throw new Error(`HTTP error! status: ${response.status}`);
-          const data = await response.json();
-          const output = document.getElementById("output");
-          document.getElementById("quoteDisplay").innerHTML = `
-            <div style="display: flex; align-items: flex-start;">
-                <img src="${data.iconUrl}" style="width: 32px; height: auto; display: inline-block; margin-right: 8px; flex-shrink: 0;" alt="Ícone">
-                <span style="font-weight: bold; padding-left:5px;">${data.character}: </span><span style="margin-left: 8px;">"${data.value}"</span>
-            </div>`;
-          
-          output.innerText = JSON.stringify(data, null, 2);
-        } catch (error) {
-          document.getElementById("output").innerText =
-            "Error fetching quote: " + error.message;
-        }
-      }
-      window.onload = () => {
-        getRandomQuote();
-      };
-    </script>
-  </body>
+    <footer class="site-footer">
+      <p>
+        The Boomer Shooter Quotes API is a free and open-source project<br />
+        designed to provide quotes from classic boomer shooter games.<br />
+        It is not affiliated with any game developers or publishers.<br />
+        All quotes are sourced from various games and are intended<br />
+        for educational and entertainment purposes only.<br />
+        All trademarks and copyrights belong to their respective owners.
+      </p>
+      <p>
+        <br />This project was made with love by a lifelong fan of boomer
+        shooters.<br><br>
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/luisaugusto2004" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/luisaugusto2004/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+      </div>
+      <p>&copy; 2025 BoomerIO. Developed by Luis.</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
