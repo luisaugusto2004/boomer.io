@@ -26,4 +26,4 @@ jobs:
       - name: Build
         run: dotnet build boomerio/boomerio.csproj --no-restore
       - name: Test
-        run: dotnet test boomerio/boomerio.csproj --no-build --verbosity normal
+        run: dotnet test boomerio.Tests/boomerio.Tests.csproj --verbosity quiet
