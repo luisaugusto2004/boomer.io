@@ -15,7 +15,6 @@
 <body>
   <div class="container">
     <img src="Assets/boomer_logo.png" id="Logo" alt="Boomer Shooter Logo" />
-    <div class="content">
       <h1>Boomer Shooter Quotes API</h1>
       <p style="color: #ffcc00;text-align: left;">
         Looking for badass one-liners from classic boomer shooters?<br />
@@ -49,117 +48,263 @@
         Other Endpoints</h2>
       <p id="endpoints">Free text search</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Quotes/search?query=bull" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query=bull</a></pre>
+          href="https://boomerio.azurewebsites.net/api/Quotes/search?query={query}" target="_blank"
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query={query}</a></pre>
       <p>Example response:</p>
-      <details>
-        <summary style="color: orange; cursor: pointer;">View example response</summary>
         <pre class="quote-box">
-[
-  {
-    "id": 176,
-    "createdAt": "2025-07-16 23:21:51",
-    "updatedAt": "2025-07-16 23:21:51",
-    "franchise": "Redneck Rampage",
-    "iconUrl": "https://i.imgur.com/FMBs691.png",
-    "character": "Leonard",
-    "value": "You screw with the bull, you get the horns."
-  },
-  {
-    "id": 311,
-    "createdAt": "2025-07-18 03:38:26",
-    "updatedAt": "2025-07-18 03:38:26",
-    "franchise": "Serious Sam",
-    "iconUrl": "https://i.imgur.com/4v8kP8j.png",
-    "character": "Sam Stone",
-    "value": "Now that's a lot of bull."
-  },
-  {
-    "id": 312,
-    "createdAt": "2025-07-18 03:38:26",
-    "updatedAt": "2025-07-18 03:38:26",
-    "franchise": "Serious Sam",
-    "iconUrl": "https://i.imgur.com/4v8kP8j.png",
-    "character": "Sam Stone",
-    "value": "Now that's a lot of flying bull."
-  }
-]</pre>
-      </details>
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">176</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Redneck Rampage"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/FMBs691.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Leonard"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"You screw with the bull, you get the horns."</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">311</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-18 03:38:26"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-18 03:38:26"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Serious Sam"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/4v8kP8j.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Sam Stone"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"Now that's a lot of bull."</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">312</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-18 03:38:26"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-18 03:38:26"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Serious Sam"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/4v8kP8j.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Sam Stone"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"Now that's a lot of flying bull."</span>
+  <span class="signal">}</span>
+<span class="signal">]</span></pre>
       <p id="endpoints">Retrieve quotes filtered by a character</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Quotes/character/{characterName}" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}</a></pre>
       <p>Example response:</p>
-      <details>
-        <summary style="color: orange; cursor: pointer;">View example response</summary>
-        <pre class="quote-box">
-[
-  {
-    "id": 190,
-    "createdAt": "2025-07-16 23:21:51",
-    "updatedAt": "2025-07-16 23:21:51",
-    "franchise": "Ion Fury",
-    "iconUrl": "https://i.imgur.com/T3Hg5XL.png",
-    "character": "Shelly Harrison",
-    "value": "Fits like a glove!"
-  },
-  {
-    "id": 191,
-    "createdAt": "2025-07-16 23:21:51",
-    "updatedAt": "2025-07-16 23:21:51",
-    "franchise": "Ion Fury",
-    "iconUrl": "https://i.imgur.com/T3Hg5XL.png",
-    "character": "Shelly Harrison",
-    "value": "I spray, you pray!"
-  },
-  {
-    "id": 192,
-    "createdAt": "2025-07-16 23:21:51",
-    "updatedAt": "2025-07-16 23:21:51",
-    "franchise": "Ion Fury",
-    "iconUrl": "https://i.imgur.com/T3Hg5XL.png",
-    "character": "Shelly Harrison",
-    "value": "Say my name!"
-  },
-  ...
-]</pre>
-      </details>
+      <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">190</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Ion Fury"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/T3Hg5XL.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Shelly Harrison"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"Fits like a glove!"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">191</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Ion Fury"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/T3Hg5XL.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Shelly Harrison"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"I spray, you pray!"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">192</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Ion Fury"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/T3Hg5XL.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Shelly Harrison"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"Say my name!"</span>
+  <span class="signal">},</span>
+  <span class="signal">...</span>
+<span class="signal">]</span></pre>
       <p id="endpoints">Retrieve all quotes in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Quotes" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes</a></pre>
-
+      <p>Example response:</p>
+      <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">1</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:23:59"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/eGZqqok.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Caleb"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"I live... AGAIN!"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">47</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Duke Nukem"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/JX5Lng2.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Duke Nukem"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"AAhhh... much better!"</span>
+        <span class="signal">},</span>
+        <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">234</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-17 02:51:18"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-17 02:51:18"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Shadow Warrior"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/9q7OGYi.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Lo Wang"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"Who wants some Wang?"</span>
+    <span class="signal">},</span>
+  <span class="signal">...</span>
+<span class="signal">]</span></pre>
+        
       <p id="endpoints">Retrive quote by ID in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Quotes/{id}" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/{id}</a></pre>
-
+        <p>Example response:</p>
+        <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">1</span><span class="signal">,</span>
+    <span class="key">"createdAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:21:51"</span><span class="signal">,</span>
+    <span class="key">"updatedAt"</span><span class="signal">:</span> <span class="value">"2025-07-16 23:23:59"</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/eGZqqok.png"</span><span class="signal">,</span>
+    <span class="key">"character"</span><span class="signal">:</span> <span class="value">"Caleb"</span><span class="signal">,</span>
+    <span class="key">"value"</span><span class="signal">:</span> <span class="value">"I live... AGAIN!"</span>
+  <span class="signal">}</span>
+<span class="signal">]</span></pre>
       <p id="endpoints">Retrieve all characters in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Characters" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters</a></pre>
+        <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">1</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Caleb"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">8</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Gideon"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">2</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Duke Nukem"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Duke Nukem"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">3</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Ion Fury"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Shelly Harrison"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">7</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Redneck Rampage"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Leonard"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">6</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Serious Sam"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Sam Stone"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">4</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Shadow Warrior"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Lo Wang"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">5</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"ULTRAKILL"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Gabriel"</span>
+  <span class="signal">}</span>
+<span class="signal">]</span></pre>
 
       <p id="endpoints">Retrieve character by ID in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Characters/{id}" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/{id}</a></pre>
+      <p>Example response:</p>
+      <pre class="quote-box">
+<span class="signal">{</span>
+  <span class="key">"id"</span><span class="signal">:</span> <span class="number">7</span><span class="signal">,</span>
+  <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Redneck Rampage"</span><span class="signal">,</span>
+  <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Leonard"</span>
+<span class="signal">}</span></pre>
 
       <p id="endpoints">Retrieve characters filtered by franchise</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseName}" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseId}</a></pre>
+      <p>Example response:</p>
+      <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">1</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Caleb"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">8</span><span class="signal">,</span>
+    <span class="key">"franchise"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Gideon"</span>
+  <span class="signal">}</span>
+<span class="signal">]</span></pre>
 
       <p id="endpoints">Retrieve all franchises in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Franchises" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises</a></pre>
+      <p>Example response:</p>
+      <pre class="quote-box">
+<span class="signal">[</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">1</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Blood"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/eGZqqok.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">2</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Duke Nukem"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/JX5Lng2.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">3</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Ion Fury"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/T3Hg5XL.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">4</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Shadow Warrior"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/9q7OGYi.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">5</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"ULTRAKILL"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/suFq6qe.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">6</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Serious Sam"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/4v8kP8j.png"</span>
+  <span class="signal">},</span>
+  <span class="signal">{</span>
+    <span class="key">"id"</span><span class="signal">:</span> <span class="number">7</span><span class="signal">,</span>
+    <span class="key">"name"</span><span class="signal">:</span> <span class="value">"Redneck Rampage"</span><span class="signal">,</span>
+    <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/FMBs691.png"</span>
+  <span class="signal">}</span>
+<span class="signal">]</span></pre>
 
       <p id="endpoints">Retrieve franchise by ID in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Franchises/{id}" target="_blank"
           style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises/{id}</a></pre>
-
-    </div>
+      <p>Example response:</p>
+      <pre class="quote-box">
+<span class="signal">{</span>
+  <span class="key">"id"</span><span class="signal">:</span> <span class="number">5</span><span class="signal">,</span>
+  <span class="key">"name"</span><span class="signal">:</span> <span class="value">"ULTRAKILL"</span><span class="signal">,</span>
+  <span class="key">"iconUrl"</span><span class="signal">:</span> <span class="value">"https://i.imgur.com/suFq6qe.png"</span>
+<span class="signal">}</span></pre>
 
     <footer class="site-footer">
       <p>

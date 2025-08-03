@@ -1,4 +1,3 @@
-using boomerio.DTOs.CharacterDTOs;
 using boomerio.DTOs.FranchiseDTOs;
 using boomerio.Models;
 using boomerio.Repositories.FranchiseRepository;
@@ -34,16 +33,12 @@ namespace boomerio.Services.FranchiseService
             }
             return ToDto(franchise);
         }
-        // TODO: Implement IconUrl in FranchiseDto and set it in the ToDto method
         public FranchiseDto ToDto(FranchiseModel franchise) =>
         new FranchiseDto
         {
             Id = franchise.Id,
             Name = franchise.Name,
-            IconUrl = franchise.IconUrl,
-            Characters = franchise.Characters
-                .Select(c => new CharacterDtoWithoutFranchise { Id = c.Id, Name = c.Name })
-                .ToList()
+            IconUrl = franchise.IconUrl
         };
     }
 }

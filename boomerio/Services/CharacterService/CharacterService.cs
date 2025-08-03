@@ -21,7 +21,7 @@ namespace boomerio.Services.CharacterService
             {
                 return new List<CharacterDto>();
             }
-            return characters.Select(ToDto).ToList();
+            return characters.Select(ToDto).ToList().OrderBy(c => c.Franchise).ThenBy(c => c.Name).ToList();
         }
 
         public async Task<CharacterDto?> GetById(int id)

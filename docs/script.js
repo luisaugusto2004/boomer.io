@@ -1,6 +1,38 @@
 
 const baseUrl = "https://boomerio.azurewebsites.net";
 
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function syntaxHighlight(obj) {
+  let json = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
+  json = escapeHtml(json);
+  
+  const tokenRegex =
+    /("([^\\"]|\\.)*"(?=\s*:))|("([^\\"]|\\.)*")|\btrue\b|\bfalse\b|\bnull\b|-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?|([\{\}\[\]\:,])/g;
+
+  return json.replace(tokenRegex, (match, p1, _p2, p3, _p4, p5) => {
+    if (p1) {
+      return `<span class="key">${p1}</span>`;
+    }
+    if (p3) {
+      const isUrl = /^"(https?:\/\/[^"]+)"$/.test(p3);
+      return `<span class="string value${isUrl ? " url" : ""}">${p3}</span>`;
+    }
+    if (match === "true" || match === "false") {
+      return `<span class="boolean">${match}</span>`;
+    }
+    if (match === "null") {
+      return `<span class="null">${match}</span>`;
+    }
+    if (p5) {
+      return `<span class="signal">${p5}</span>`;
+    }
+    return `<span class="number">${match}</span>`;
+  });
+}
+
 async function getRandomQuote() {
   try {
     const response = await fetch(`${baseUrl}/api/quotes/random`);
@@ -18,14 +50,7 @@ async function getRandomQuote() {
 				"${data.value}"
 					</span>
             		</div>`;
-    const selectedData = {
-	id: data.id,
-  	franchise: data.franchise,
-	iconUrl: data.iconUrl,
-  	character: data.character,
-        value: data.value
-     };
-    output.innerText = JSON.stringify(selectedData, null, 2);
+    output.innerHTML = syntaxHighlight(data);
   } catch (error) {
     document.getElementById("output").innerText =
       "Error fetching quote: " + error.message;
