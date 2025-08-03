@@ -34,7 +34,8 @@
 
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px; font-weight: bold;">GET <a
           href="https://boomerio.azurewebsites.net/api/Quotes/random" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/random</a></pre>
+          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/random</a><button class="copy-button" onclick="copyEndpoint(this)" 
+          onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
 
       <p>Example response:</p>
 
@@ -47,9 +48,10 @@
       <h2 style="color: orange; font-family: 'Pixelify Sans', sans-serif">
         Other Endpoints</h2>
       <p id="endpoints">Free text search</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Quotes/search?query={query}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query={query}</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a 
+        href="https://boomerio.azurewebsites.net/api/Quotes/search?query={query}" target="_blank"
+              style="color:#ff6666">https://boomerio.azurewebsites.net/api/Quotes/search?query={query}</a><button class="copy-button" onclick="copyEndpoint(this)"
+              onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
         <pre class="quote-box">
 <span class="signal">[</span>
@@ -82,9 +84,8 @@
   <span class="signal">}</span>
 <span class="signal">]</span></pre>
       <p id="endpoints">Retrieve quotes filtered by a character</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Quotes/character/{characterName}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}" target="_blank"
+              style="color:#ff6666">https://boomerio.azurewebsites.net/api/Quotes/character/{characterId}</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">[</span>
@@ -118,9 +119,7 @@
   <span class="signal">...</span>
 <span class="signal">]</span></pre>
       <p id="endpoints">Retrieve all quotes in JSON</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Quotes" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Quotes" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Quotes</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">[</span>
@@ -155,9 +154,7 @@
 <span class="signal">]</span></pre>
         
       <p id="endpoints">Retrive quote by ID in JSON</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Quotes/{id}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Quotes/{id}</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Quotes/{id}" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Quotes/{id}</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
         <p>Example response:</p>
         <pre class="quote-box">
 <span class="signal">[</span>
@@ -172,9 +169,8 @@
   <span class="signal">}</span>
 <span class="signal">]</span></pre>
       <p id="endpoints">Retrieve all characters in JSON</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Characters" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Characters" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Characters</a><button class="copy-button" onclick="copyEndpoint(this)"  onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
+      
         <pre class="quote-box">
 <span class="signal">[</span>
   <span class="signal">{</span>
@@ -222,7 +218,8 @@
       <p id="endpoints">Retrieve character by ID in JSON</p>
       <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
           href="https://boomerio.azurewebsites.net/api/Characters/{id}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/{id}</a></pre>
+          id="endpoint-link" style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/{id}</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" 
+          onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">{</span>
@@ -232,9 +229,8 @@
 <span class="signal">}</span></pre>
 
       <p id="endpoints">Retrieve characters filtered by franchise</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseName}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseId}</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseName}" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Characters/franchise/{franchiseId}</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
+      
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">[</span>
@@ -251,9 +247,7 @@
 <span class="signal">]</span></pre>
 
       <p id="endpoints">Retrieve all franchises in JSON</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Franchises" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Franchises" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Franchises</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">[</span>
@@ -295,9 +289,7 @@
 <span class="signal">]</span></pre>
 
       <p id="endpoints">Retrieve franchise by ID in JSON</p>
-      <pre style=" background: #222; color: #ff5555; padding: 10px; border-radius: 8px;">GET <a
-          href="https://boomerio.azurewebsites.net/api/Franchises/{id}" target="_blank"
-          style="color: #ff6666">https://boomerio.azurewebsites.net/api/Franchises/{id}</a></pre>
+      <pre style="background:#222;color:#ff5555;padding:10px;border-radius:8px;">GET <a href="https://boomerio.azurewebsites.net/api/Franchises/{id}" target="_blank" style="color:#ff6666">https://boomerio.azurewebsites.net/api/Franchises/{id}</a><button class="copy-button" onclick="copyEndpoint(this)" onmouseover="this.style.color='orange'" onmouseout="this.style.color='#ff6666'">copy</button></pre>
       <p>Example response:</p>
       <pre class="quote-box">
 <span class="signal">{</span>

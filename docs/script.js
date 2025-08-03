@@ -56,6 +56,24 @@ async function getRandomQuote() {
       "Error fetching quote: " + error.message;
   }
 }
+
+function copyEndpoint(button) {
+  const link = button.previousElementSibling;
+  const textToCopy = link.textContent;
+
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    const originalText = button.textContent;
+    button.textContent = "copied";
+    button.disabled = true;
+
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 800);
+  }).catch(err => {
+    console.error("Erro ao copiar:", err);
+  });
+}
 window.onload = () => {
   getRandomQuote();
 };
