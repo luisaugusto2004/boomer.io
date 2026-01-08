@@ -18,7 +18,7 @@ namespace boomerio.Repositories.QuoteRepository
         public async Task<List<QuoteModel>> GetByCharacterId(int idCharacter)
         {
             return await _context
-                .Quotes.Include(q => q.Character)
+                .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(q => q.Franchise)
                 .Where(q => q.Character.Id == idCharacter)
                 .ToListAsync();
@@ -27,7 +27,7 @@ namespace boomerio.Repositories.QuoteRepository
         public async Task<List<QuoteModel>> GetAllAsync()
         {
             return await _context
-                .Quotes.Include(q => q.Character)
+                .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(q => q.Franchise)
                 .ToListAsync();
         }
@@ -35,7 +35,7 @@ namespace boomerio.Repositories.QuoteRepository
         public async Task<QuoteModel?> GetByIdAsync(int id)
         {
             return await _context
-                .Quotes.Include(q => q.Character)
+                .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(q => q.Franchise)
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
@@ -51,7 +51,7 @@ namespace boomerio.Repositories.QuoteRepository
             int index = RandomNumberGenerator.GetInt32(_context.Quotes.Count());
 
             var quote = await _context
-                .Quotes.Include(q => q.Character)
+                .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(c => c.Franchise)
                 .OrderBy(q => q.Id)
                 .Skip(index)
@@ -64,7 +64,7 @@ namespace boomerio.Repositories.QuoteRepository
         public async Task<List<QuoteModel>> GetByQueryAsync(string query)
         {
             return await _context
-                .Quotes.Include(q => q.Character)
+                .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(c => c.Franchise)
                 .Where(q => q.QuoteText.Contains(query))
                 .ToListAsync();
