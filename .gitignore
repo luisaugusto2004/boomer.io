@@ -401,3 +401,6 @@ FodyWeavers.xsd
 *.sln.iml
 *.sqlite
 *.sql
+*.db
+*.db-shm
+*.db-wal

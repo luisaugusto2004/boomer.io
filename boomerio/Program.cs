@@ -14,7 +14,7 @@ using boomerio.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace boomerio
 {
