@@ -18,14 +18,14 @@ namespace boomerio.Controllers
 
         /// <summary>
         /// Retrieves all franchises.
-        /// If no franchises are available, it returns an empty list.
+        /// If no franchises are available, it returns an empty collection.
         /// </summary>
-        /// <response code="200">Returns a list of franchises.</response>
+        /// <response code="200">Returns a collection of franchises.</response>
         /// <response code="500">If an internal server error occurs.</response>
-        [ProducesResponseType(typeof(List<FranchiseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<FranchiseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<ActionResult<List<FranchiseDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<FranchiseDto>>> GetAll()
         {
             var franchises = await _franchiseService.GetAllAsync();
             return Ok(franchises);

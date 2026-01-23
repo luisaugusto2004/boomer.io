@@ -20,7 +20,7 @@ namespace boomerio.Repositories.FranchiseRepository
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        public async Task<List<FranchiseModel>> GetAll()
+        public async Task<IEnumerable<FranchiseModel>> GetAll()
         {
             return await _context.Franchises.AsNoTracking().Include(f => f.Characters).ToListAsync();
         }

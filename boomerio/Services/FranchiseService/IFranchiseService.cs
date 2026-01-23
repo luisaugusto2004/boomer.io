@@ -4,7 +4,7 @@ namespace boomerio.Services.FranchiseService
 {
     public interface IFranchiseService
     {
-        Task<List<FranchiseDto>> GetAllAsync();
+        Task<IEnumerable<FranchiseDto>> GetAllAsync();
         Task<FranchiseDto?> GetById(int id);
     }
 }

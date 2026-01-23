@@ -18,14 +18,14 @@ namespace boomerio.Controllers
 
         /// <summary>
         /// Retrieves all characters.
-        /// If no characters are available, it returns an empty list.
+        /// If no characters are available, it returns an empty collection.
         /// </summary>
-        /// <response code="200">Returns a list of characters.</response>
+        /// <response code="200">Returns a collection of characters.</response>
         /// <response code="500">If an internal server error occurs.</response>
-        [ProducesResponseType(typeof(List<CharacterDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<CharacterDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<ActionResult<List<CharacterDto>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<CharacterDto>>> GetAllAsync()
         {
             var characters = await _characterService.GetAllAsync();
             return Ok(characters);
@@ -61,19 +61,19 @@ namespace boomerio.Controllers
         }
 
         /// <summary>
-        /// Retrieves characters by their franchise ID.
+        /// Retrieves a collection of characters by their franchise ID.
         /// </summary>
         /// <param name="idFranchise">The ID of the franchise to which the characters belong</param>
-        /// <response code="200">Returns the list of characters for the specified franchise ID.</response>
+        /// <response code="200">Returns a collection of characters for the specified franchise ID.</response>
         /// <response code="400">If the ID is less than or equal to zero.</response>
         /// <response code="404">If the franchise with the specified ID does not exist or has no characters.</response>
         /// <response code="500">If an internal server error occurs.</response>
-        [ProducesResponseType(typeof(List<CharacterDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<CharacterDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("franchise/{idFranchise}")]
-        public async Task<ActionResult<List<CharacterDto>>> GetByFranchiseId(int idFranchise)
+        public async Task<ActionResult<IEnumerable<CharacterDto>>> GetByFranchiseId(int idFranchise)
         {
             if (idFranchise <= 0)
             {

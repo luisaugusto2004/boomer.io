@@ -165,7 +165,7 @@ namespace boomerio.Tests
 
             var fakeService = A.Fake<IQuoteService>();
             A.CallTo(() => fakeService.GetByCharacterId(1))
-                .Returns(Task.FromResult<List<QuoteDto>>(expected));
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(expected));
 
             var controller = new QuotesController(fakeService);
 
@@ -186,7 +186,7 @@ namespace boomerio.Tests
             //Arange
             var fakeService = A.Fake<IQuoteService>();
             A.CallTo(() => fakeService.GetByCharacterId(1))
-                .Returns(Task.FromResult<List<QuoteDto>>(new List<QuoteDto>()));
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(new List<QuoteDto>()));
 
             var controller = new QuotesController(fakeService);
 
@@ -269,7 +269,7 @@ namespace boomerio.Tests
 
             var fakeService = A.Fake<IQuoteService>();
             A.CallTo(() => fakeService.GetByCharacterId(1))
-                .Returns(Task.FromResult(expectedQuotes));
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(expectedQuotes));
 
             var controller = new QuotesController(fakeService);
 
@@ -294,7 +294,7 @@ namespace boomerio.Tests
             };
 
             var fakeService = A.Fake<IQuoteService>();
-            A.CallTo(() => fakeService.GetByQuery(query)).Returns(Task.FromResult(expected));
+            A.CallTo(() => fakeService.GetByQuery(query)).Returns(Task.FromResult<IEnumerable<QuoteDto>>(expected));
 
             var controller = new QuotesController(fakeService);
 
@@ -317,7 +317,7 @@ namespace boomerio.Tests
             string query = "nonexistent";
             var fakeService = A.Fake<IQuoteService>();
             A.CallTo(() => fakeService.GetByQuery(query))
-                .Returns(Task.FromResult(new List<QuoteDto>()));
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(new List<QuoteDto>()));
 
             var controller = new QuotesController(fakeService);
 
@@ -335,7 +335,7 @@ namespace boomerio.Tests
             string query = string.Empty;
             var fakeService = A.Fake<IQuoteService>();
             A.CallTo(() => fakeService.GetByQuery(query))
-                .Returns(Task.FromResult(new List<QuoteDto>()));
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(new List<QuoteDto>()));
             var controller = new QuotesController(fakeService);
 
             // Act
@@ -407,7 +407,7 @@ namespace boomerio.Tests
                 new QuoteDto { Value = "Quote 2", Character = "Character 2" },
             };
             var fakeService = A.Fake<IQuoteService>();
-            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult(expected));
+            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult<IEnumerable<QuoteDto>>(expected));
             var controller = new QuotesController(fakeService);
             // Act
             var result = await controller.GetAll();
@@ -422,7 +422,7 @@ namespace boomerio.Tests
         {
             // Arrange
             var fakeService = A.Fake<IQuoteService>();
-            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult(new List<QuoteDto>()));
+            A.CallTo(() => fakeService.GetAll()).Returns(Task.FromResult<IEnumerable<QuoteDto>>(new List<QuoteDto>()));
             var controller = new QuotesController(fakeService);
             // Act
             var result = await controller.GetAll();

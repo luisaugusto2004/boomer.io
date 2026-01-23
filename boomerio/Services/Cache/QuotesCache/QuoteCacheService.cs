@@ -20,10 +20,10 @@ namespace boomerio.Services.Cache.QuotesCache
             };
         }
 
-        public async Task<List<QuoteDto>> GetAll()
+        public async Task<IEnumerable<QuoteDto>> GetAll()
         {
             string cacheKey = "quote_all";
-            if (_cache.TryGetValue(cacheKey, out List<QuoteDto>? cachedQuotes) && cachedQuotes is not null) {
+            if (_cache.TryGetValue(cacheKey, out IEnumerable<QuoteDto>? cachedQuotes) && cachedQuotes is not null) {
                 return cachedQuotes;
             }
 
@@ -32,10 +32,10 @@ namespace boomerio.Services.Cache.QuotesCache
             return quotes;
         }
 
-        public async Task<List<QuoteDto>> GetByCharacterId(int idCharacter)
+        public async Task<IEnumerable<QuoteDto>> GetByCharacterId(int idCharacter)
         {
             string cacheKey = $"quote_{idCharacter}";
-            if(_cache.TryGetValue(cacheKey, out List<QuoteDto>? cachedQuotes) && cachedQuotes is not null)
+            if(_cache.TryGetValue(cacheKey, out IEnumerable<QuoteDto>? cachedQuotes) && cachedQuotes is not null)
             {
                 return cachedQuotes;
             }
@@ -46,7 +46,7 @@ namespace boomerio.Services.Cache.QuotesCache
 
         public Task<QuoteDto?> GetById(int id) => _inner.GetById(id);
 
-        public Task<List<QuoteDto>> GetByQuery(string query) => _inner.GetByQuery(query);
+        public Task<IEnumerable<QuoteDto>> GetByQuery(string query) => _inner.GetByQuery(query);
 
         public Task<QuoteDto?> GetRandomQuote() => _inner.GetRandomQuote();
     }

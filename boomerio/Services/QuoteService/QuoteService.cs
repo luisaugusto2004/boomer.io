@@ -13,19 +13,19 @@ namespace boomerio.Services.QuoteService
             _quoteRepository = quoteRepository;
         }
 
-        public async Task<List<QuoteDto>> GetAll()
+        public async Task<IEnumerable<QuoteDto>> GetAll()
         {
             var quotes = await _quoteRepository.GetAllAsync();
             return quotes.Select(ToDto).OrderBy(c => c.Character).ToList();
         }
 
-        public async Task<List<QuoteDto>> GetByCharacterId(int idCharacter)
+        public async Task<IEnumerable<QuoteDto>> GetByCharacterId(int idCharacter)
         {
             var quotes = await _quoteRepository.GetByCharacterId(idCharacter);
             return quotes.Select(ToDto).ToList();
         }
 
-        public async Task<List<QuoteDto>> GetByQuery(string query)
+        public async Task<IEnumerable<QuoteDto>> GetByQuery(string query)
         {
             var quotes = await _quoteRepository.GetByQueryAsync(query);
             return quotes.Select(ToDto).ToList();

@@ -20,11 +20,11 @@ namespace boomerio.Services.Cache.FranchisesCache
             };
         }
 
-        public async Task<List<FranchiseDto>> GetAllAsync()
+        public async Task<IEnumerable<FranchiseDto>> GetAllAsync()
         {
             string cacheKey = "quotes_all";
 
-            if (_cache.TryGetValue(cacheKey, out List<FranchiseDto>? cachedFranchises) && cachedFranchises is not null)
+            if (_cache.TryGetValue(cacheKey, out IEnumerable<FranchiseDto>? cachedFranchises) && cachedFranchises is not null)
             {
                 return cachedFranchises;
             }

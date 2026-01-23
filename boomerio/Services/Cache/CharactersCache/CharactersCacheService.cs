@@ -20,7 +20,7 @@ namespace boomerio.Services.Cache.CharactersCache
             };
         }
 
-        public async Task<List<CharacterDto>> GetAllAsync()
+        public async Task<IEnumerable<CharacterDto>> GetAllAsync()
         {
             string cacheKey = "characters_all";
 
@@ -34,7 +34,7 @@ namespace boomerio.Services.Cache.CharactersCache
             return characters;
         }
 
-        public Task<List<CharacterDto>> GetByFranchiseId(int idFranchise) => _inner.GetByFranchiseId(idFranchise);
+        public Task<IEnumerable<CharacterDto>> GetByFranchiseId(int idFranchise) => _inner.GetByFranchiseId(idFranchise);
 
         public Task<CharacterDto?> GetById(int id) => _inner.GetById(id);
     }

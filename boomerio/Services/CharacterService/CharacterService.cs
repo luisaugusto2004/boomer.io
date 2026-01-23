@@ -13,7 +13,7 @@ namespace boomerio.Services.CharacterService
             _characterRepository = characterRepository;
         }
 
-        public async Task<List<CharacterDto>> GetAllAsync()
+        public async Task<IEnumerable<CharacterDto>> GetAllAsync()
         {
             var characters = await _characterRepository.GetAll();
 
@@ -35,7 +35,7 @@ namespace boomerio.Services.CharacterService
             return ToDto(character);
         }
 
-        public async Task<List<CharacterDto>> GetByFranchiseId(int idFranchise)
+        public async Task<IEnumerable<CharacterDto>> GetByFranchiseId(int idFranchise)
         {
             var characters = await _characterRepository.GetByFranchiseId(idFranchise);
 

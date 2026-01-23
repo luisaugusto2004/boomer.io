@@ -4,8 +4,8 @@ namespace boomerio.Services.CharacterService
 {
     public interface ICharacterService
     {
-        Task<List<CharacterDto>> GetAllAsync();
+        Task<IEnumerable<CharacterDto>> GetAllAsync();
         Task<CharacterDto?> GetById(int id);
-        Task<List<CharacterDto>> GetByFranchiseId(int idFranchise);
+        Task<IEnumerable<CharacterDto>> GetByFranchiseId(int idFranchise);
     }
 }

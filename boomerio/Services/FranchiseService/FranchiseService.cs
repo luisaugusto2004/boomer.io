@@ -13,7 +13,7 @@ namespace boomerio.Services.FranchiseService
             _franchiseRepository = franchiseRepository;
         }
 
-        public async Task<List<FranchiseDto>> GetAllAsync()
+        public async Task<IEnumerable<FranchiseDto>> GetAllAsync()
         {
             var franchises = await _franchiseRepository.GetAll();
 
@@ -33,6 +33,7 @@ namespace boomerio.Services.FranchiseService
             }
             return ToDto(franchise);
         }
+
         public FranchiseDto ToDto(FranchiseModel franchise) =>
         new FranchiseDto
         {

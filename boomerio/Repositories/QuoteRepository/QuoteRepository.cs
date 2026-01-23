@@ -15,7 +15,7 @@ namespace boomerio.Repositories.QuoteRepository
             _context = context;
         }
 
-        public async Task<List<QuoteModel>> GetByCharacterId(int idCharacter)
+        public async Task<IEnumerable<QuoteModel>> GetByCharacterId(int idCharacter)
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
@@ -24,7 +24,7 @@ namespace boomerio.Repositories.QuoteRepository
                 .ToListAsync();
         }
 
-        public async Task<List<QuoteModel>> GetAllAsync()
+        public async Task<IEnumerable<QuoteModel>> GetAllAsync()
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
@@ -61,7 +61,7 @@ namespace boomerio.Repositories.QuoteRepository
         }
 
         // TODO: Implement ToLower() function to query and quote value(not now and idk when)
-        public async Task<List<QuoteModel>> GetByQueryAsync(string query)
+        public async Task<IEnumerable<QuoteModel>> GetByQueryAsync(string query)
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)

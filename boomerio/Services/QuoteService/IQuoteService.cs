@@ -4,10 +4,10 @@ namespace boomerio.Services.QuoteService
 {
     public interface IQuoteService
     {
-        Task<List<QuoteDto>> GetAll();
+        Task<IEnumerable<QuoteDto>> GetAll();
         Task<QuoteDto?> GetById(int id);
-        Task<List<QuoteDto>> GetByCharacterId(int idCharacter);
+        Task<IEnumerable<QuoteDto>> GetByCharacterId(int idCharacter);
         Task<QuoteDto?> GetRandomQuote();
-        Task<List<QuoteDto>> GetByQuery(string query);
+        Task<IEnumerable<QuoteDto>> GetByQuery(string query);
     }
 }

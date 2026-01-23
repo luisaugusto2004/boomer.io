@@ -93,7 +93,7 @@ namespace boomerio.Tests
                     Franchise = "Franchise 2",
                 },
             };
-            A.CallTo(() => fakeService.GetAllAsync()).Returns(Task.FromResult(expectedCharacters));
+            A.CallTo(() => fakeService.GetAllAsync()).Returns(Task.FromResult<IEnumerable<CharacterDto>>(expectedCharacters));
 
             var controller = new CharactersController(fakeService);
 
@@ -112,7 +112,7 @@ namespace boomerio.Tests
             // Arrange
             var fakeService = A.Fake<ICharacterService>();
             A.CallTo(() => fakeService.GetAllAsync())
-                .Returns(Task.FromResult(new List<CharacterDto>()));
+                .Returns(Task.FromResult<IEnumerable<CharacterDto>>(new List<CharacterDto>()));
 
             var controller = new CharactersController(fakeService);
 
@@ -150,7 +150,7 @@ namespace boomerio.Tests
             };
 
             A.CallTo(() => fakeService.GetByFranchiseId(1))
-                .Returns(Task.FromResult(expectedCharacters));
+                .Returns(Task.FromResult<IEnumerable<CharacterDto>>(expectedCharacters));
 
             var controller = new CharactersController(fakeService);
 
@@ -189,7 +189,7 @@ namespace boomerio.Tests
             // Arrange
             var fakeService = A.Fake<ICharacterService>();
             A.CallTo(() => fakeService.GetByFranchiseId(1))
-                .Returns(Task.FromResult(new List<CharacterDto>()));
+                .Returns(Task.FromResult<IEnumerable<CharacterDto>>(new List<CharacterDto>()));
 
             var controller = new CharactersController(fakeService);
 

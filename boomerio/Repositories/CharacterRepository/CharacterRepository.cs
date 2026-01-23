@@ -20,14 +20,14 @@ namespace boomerio.Repositories.CharacterRepository
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<List<CharacterModel>> GetAll()
+        public async Task<IEnumerable<CharacterModel>> GetAll()
         {
             return await _context.Characters.AsNoTracking().Include(c => c.Franchise).ToListAsync();
         }
 
-        public Task<List<CharacterModel>> GetByFranchiseId(int franchiseId)
+        public async Task<IEnumerable<CharacterModel>> GetByFranchiseId(int franchiseId)
         {
-            return _context
+            return await _context
                 .Characters.AsNoTracking().Include(c => c.Franchise)
                 .Where(c => c.Franchise.Id == franchiseId)
                 .ToListAsync();

@@ -4,10 +4,10 @@ namespace boomerio.Repositories.QuoteRepository
 {
     public interface IQuoteRepository
     {
-        Task<List<QuoteModel>> GetAllAsync();
+        Task<IEnumerable<QuoteModel>> GetAllAsync();
         Task<QuoteModel?> GetByIdAsync(int id);
-        Task<List<QuoteModel>> GetByCharacterId(int idCharacter);
+        Task<IEnumerable<QuoteModel>> GetByCharacterId(int idCharacter);
         Task<QuoteModel?> GetRandomQuote();
-        Task<List<QuoteModel>> GetByQueryAsync(string query);
+        Task<IEnumerable<QuoteModel>> GetByQueryAsync(string query);
     }
 }

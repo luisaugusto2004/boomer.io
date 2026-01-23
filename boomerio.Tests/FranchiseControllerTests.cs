@@ -19,7 +19,7 @@ namespace boomerio.Tests
                 new FranchiseDto { Id = 1, Name = "Test Franchise 1" },
                 new FranchiseDto { Id = 2, Name = "Test Franchise 2" },
             };
-            A.CallTo(() => fakeService.GetAllAsync()).Returns(Task.FromResult(expectedFranchises));
+            A.CallTo(() => fakeService.GetAllAsync()).Returns(Task.FromResult<IEnumerable<FranchiseDto>>(expectedFranchises));
             var controller = new FranchisesController(fakeService);
             var result = await controller.GetAll();
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -32,7 +32,7 @@ namespace boomerio.Tests
         {
             var fakeService = A.Fake<IFranchiseService>();
             A.CallTo(() => fakeService.GetAllAsync())
-                .Returns(Task.FromResult(new List<FranchiseDto>()));
+                .Returns(Task.FromResult<IEnumerable<FranchiseDto>>(new List<FranchiseDto>()));
             var controller = new FranchisesController(fakeService);
             var result = await controller.GetAll();
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
