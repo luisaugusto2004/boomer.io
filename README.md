@@ -1,7 +1,7 @@
 # Boomer.io - Boomer Shooter Quotes API
 
 ![License](https://img.shields.io/github/license/luisaugusto2004/boomer.io)
-![.NET](https://img.shields.io/badge/.NET%208-512bd4?logo=dotnet&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET%2010-512bd4?logo=dotnet&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
 [![Azure Static Web Apps CI/CD](https://github.com/luisaugusto2004/boomer.io/actions/workflows/main.yml/badge.svg)](https://github.com/luisaugusto2004/boomer.io/actions/workflows/main.yml)
@@ -36,7 +36,7 @@ A lightweight **RESTful API** serving quotes from classic _boomer shooters_ (e.g
 
 ## Tech Stack
 
-- **Backend:** ASP.NET Core 8 Web API
+- **Backend:** ASP.NET Core 10 Web API
 - **ORM:** Entity Framework Core + SQLite
 - **Frontend:** Vanilla HTML + JavaScript + CSS (no frameworks)
 - **API Docs:** Swagger
@@ -88,7 +88,7 @@ docker-compose up --build
 
 ## Running Locally
 
-### Backend (.NET 8):
+### Backend (.NET 10):
 
 ```bash
 cd boomerio
