@@ -20,6 +20,8 @@ namespace boomerio.Services.Cache.CharactersCache
             };
         }
 
+        public Task<bool> Exists(int CharacterId) => _inner.Exists(CharacterId);
+
         public async Task<IEnumerable<CharacterDto>> GetAllAsync()
         {
             string cacheKey = "characters_all";

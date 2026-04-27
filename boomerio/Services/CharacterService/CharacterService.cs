@@ -46,6 +46,11 @@ namespace boomerio.Services.CharacterService
             return characters.Select(ToDto).ToList();
         }
 
+        public async Task<bool> Exists(int CharacterId)
+        {
+            return await _characterRepository.GetById(CharacterId) != null ? true : false;
+        }
+
         public CharacterDto ToDto(CharacterModel character) =>
             new CharacterDto
             {

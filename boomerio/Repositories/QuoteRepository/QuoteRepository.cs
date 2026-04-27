@@ -20,7 +20,8 @@ namespace boomerio.Repositories.QuoteRepository
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
                 .ThenInclude(q => q.Franchise)
-                .Where(q => q.Character.Id == idCharacter)
+                .Where(q => q.CharacterId == idCharacter)
+                .OrderBy(q => q.Id)
                 .ToListAsync();
         }
 
@@ -68,6 +69,13 @@ namespace boomerio.Repositories.QuoteRepository
                 .ThenInclude(c => c.Franchise)
                 .Where(q => q.QuoteText.Contains(query))
                 .ToListAsync();
+        }
+
+        public async Task<QuoteModel> Create(QuoteModel quote)
+        {
+            await _context.AddAsync(quote);
+            await _context.SaveChangesAsync();
+            return quote;
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using boomerio.DTOs;
 using boomerio.DTOs.QuoteDTOs;
+using boomerio.Services.CharacterService;
 using boomerio.Services.QuoteService;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace boomerio.Controllers
 {
@@ -10,10 +12,12 @@ namespace boomerio.Controllers
     public class QuotesController : ControllerBase
     {
         private readonly IQuoteService _quoteService;
+        public readonly ICharacterService _characterService;
 
-        public QuotesController(IQuoteService quoteService)
+        public QuotesController(IQuoteService quoteService, ICharacterService characterService)
         {
             _quoteService = quoteService;
+            _characterService = characterService;
         }
 
         /// <summary>
@@ -85,9 +89,9 @@ namespace boomerio.Controllers
         /// Retrieves a collection of quotes by their character ID.
         /// </summary>
         /// <param name="idCharacter">The ID of the character whose quotes are to be retrieved.</param>
-        /// <response code="200">Returns a collection of quotes for the specified character ID.</response>
-        /// <response code="400">If the character ID is less than or equal to zero.</response>
-        /// <response code="404">If no quotes are found for the specified character ID.</response>
+        /// <response code="200">Retrieves all quotes associated with a specific character ID.</response>
+        /// <response code="400">If the character ID is not valid or cannot be parsed.</response>
+        /// <response code="404">If the character with the specified ID does not exist.</response>
         /// <response code="500">If an internal server error occurs.</response>
         [ProducesResponseType(typeof(IEnumerable<QuoteDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
@@ -102,17 +106,18 @@ namespace boomerio.Controllers
                     new ApiError("BadRequest", 400, "Character ID must be greater than zero.")
                 );
             }
-            var quotes = await _quoteService.GetByCharacterId(idCharacter);
-            if (quotes == null || !quotes.Any())
+            var characterExists = await _characterService.Exists(idCharacter);
+            if (!characterExists) 
             {
                 return NotFound(
                     new ApiError(
                         "NotFound",
                         404,
-                        $"No quotes found for character ID {idCharacter}."
+                        $"Character not found for the id {idCharacter}."
                     )
                 );
             }
+            var quotes = await _quoteService.GetByCharacterId(idCharacter);
             return Ok(quotes);
         }
 

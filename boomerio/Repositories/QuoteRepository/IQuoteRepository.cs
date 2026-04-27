@@ -9,5 +9,6 @@ namespace boomerio.Repositories.QuoteRepository
         Task<IEnumerable<QuoteModel>> GetByCharacterId(int idCharacter);
         Task<QuoteModel?> GetRandomQuote();
         Task<IEnumerable<QuoteModel>> GetByQueryAsync(string query);
+        Task<QuoteModel> Create(QuoteModel quote);
     }
 }

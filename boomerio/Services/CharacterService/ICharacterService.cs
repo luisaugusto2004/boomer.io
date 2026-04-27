@@ -7,5 +7,6 @@ namespace boomerio.Services.CharacterService
         Task<IEnumerable<CharacterDto>> GetAllAsync();
         Task<CharacterDto?> GetById(int id);
         Task<IEnumerable<CharacterDto>> GetByFranchiseId(int idFranchise);
+        Task<bool> Exists(int CharacterId);
     }
 }
