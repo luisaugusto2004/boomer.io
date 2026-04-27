@@ -20,6 +20,8 @@ namespace boomerio.Services.Cache.FranchisesCache
             };
         }
 
+        public Task<bool> Exists(int FranchiseId) => _inner.Exists(FranchiseId);
+
         public async Task<IEnumerable<FranchiseDto>> GetAllAsync()
         {
             string cacheKey = "quotes_all";

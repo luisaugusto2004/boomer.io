@@ -13,6 +13,11 @@ namespace boomerio.Services.FranchiseService
             _franchiseRepository = franchiseRepository;
         }
 
+        public async Task<bool> Exists(int FranchiseId)
+        {
+            return await _franchiseRepository.GetById(FranchiseId) != null ? true : false;
+        }
+
         public async Task<IEnumerable<FranchiseDto>> GetAllAsync()
         {
             var franchises = await _franchiseRepository.GetAll();

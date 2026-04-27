@@ -1,6 +1,7 @@
 ﻿using boomerio.DTOs;
 using boomerio.DTOs.CharacterDTOs;
 using boomerio.Services.CharacterService;
+using boomerio.Services.FranchiseService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace boomerio.Controllers
@@ -10,10 +11,12 @@ namespace boomerio.Controllers
     public class CharactersController : ControllerBase
     {
         public readonly ICharacterService _characterService;
+        public readonly IFranchiseService _franchiseService;
 
-        public CharactersController(ICharacterService characterService)
+        public CharactersController(ICharacterService characterService, IFranchiseService franchiseService)
         {
             _characterService = characterService;
+            _franchiseService = franchiseService;
         }
 
         /// <summary>
@@ -64,9 +67,9 @@ namespace boomerio.Controllers
         /// Retrieves a collection of characters by their franchise ID.
         /// </summary>
         /// <param name="idFranchise">The ID of the franchise to which the characters belong</param>
-        /// <response code="200">Returns a collection of characters for the specified franchise ID.</response>
-        /// <response code="400">If the ID is less than or equal to zero.</response>
-        /// <response code="404">If the franchise with the specified ID does not exist or has no characters.</response>
+        /// <response code="200">Retrieves all characters associated with a specific franchise ID.</response>
+        /// <response code="400">If the franchise ID is not valid or cannot be parsed.</response>
+        /// <response code="404">If the franchise with the specified ID does not exist.</response>
         /// <response code="500">If an internal server error occurs.</response>
         [ProducesResponseType(typeof(IEnumerable<CharacterDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
@@ -79,17 +82,18 @@ namespace boomerio.Controllers
             {
                 return BadRequest(new ApiError("BadRequest", 400, "ID must be greater than zero."));
             }
-            var characters = await _characterService.GetByFranchiseId(idFranchise);
-            if (characters == null || !characters.Any())
+            var franchiseExists = await _franchiseService.Exists(idFranchise);
+            if (!franchiseExists)
             {
                 return NotFound(
                     new ApiError(
                         "NotFound",
                         404,
-                        $"No characters found for franchise ID {idFranchise}."
+                        $"Franchise not found for the id {idFranchise}."
                     )
                 );
             }
+            var characters = await _characterService.GetByFranchiseId(idFranchise);
             return Ok(characters);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using boomerio.DTOs.QuoteDTOs;
+using System.Text.Json.Serialization;
 
 namespace boomerio.DTOs.CharacterDTOs
 {
@@ -10,5 +11,7 @@ namespace boomerio.DTOs.CharacterDTOs
 
         [JsonIgnore]
         public int FranchiseId { get; set; }
+        [JsonIgnore]
+        public IEnumerable<QuoteDto>? Quotes { get; set; }
     }
 }

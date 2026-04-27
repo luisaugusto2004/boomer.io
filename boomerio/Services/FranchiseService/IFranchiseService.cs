@@ -6,5 +6,6 @@ namespace boomerio.Services.FranchiseService
     {
         Task<IEnumerable<FranchiseDto>> GetAllAsync();
         Task<FranchiseDto?> GetById(int id);
+        Task<bool> Exists(int FranchiseId);
     }
 }
