@@ -16,7 +16,7 @@ namespace boomerio.Repositories.CharacterRepository
         public async Task<CharacterModel?> GetById(int id)
         {
             return await _context
-                .Characters.AsNoTracking().Include(c => c.Franchise)
+                .Characters.AsNoTracking().Include(c => c.Franchise).Include(c => c.Quotes)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 

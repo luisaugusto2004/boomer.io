@@ -1,5 +1,6 @@
 ﻿using boomerio.Controllers;
 using boomerio.DTOs;
+using boomerio.DTOs.CharacterDTOs;
 using boomerio.DTOs.QuoteDTOs;
 using boomerio.Services.CharacterService;
 using boomerio.Services.QuoteService;
@@ -297,6 +298,30 @@ namespace boomerio.Tests
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
             var returnedQuotes = Assert.IsType<List<QuoteDto>>(okResult.Value);
             returnedQuotes.Should().HaveCount(expectedQuotes.Count);
+        }
+
+        [Fact]
+        public async Task GetByCharacterId_ShouldReturnEmptyList_WhenCharacterExistsButNoQuotes()
+        {
+            // Arrange        
+
+            var fakeQuoteService = A.Fake<IQuoteService>();
+            var fakeCharacterService = A.Fake<ICharacterService>();
+
+            A.CallTo(() => fakeCharacterService.Exists(1)).Returns(Task.FromResult<bool>(true));
+            A.CallTo(() => fakeQuoteService.GetByCharacterId(1))
+                .Returns(Task.FromResult<IEnumerable<QuoteDto>>(new List<QuoteDto>()));
+
+            var controller = new QuotesController(fakeQuoteService, fakeCharacterService);
+
+            // Act
+            var result = await controller.GetByCharacterId(1);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var quotes = Assert.IsAssignableFrom<IEnumerable<QuoteDto>>(okResult.Value);
+
+            quotes.Should().BeEmpty();
         }
 
         [Fact]

@@ -58,6 +58,13 @@ namespace boomerio.Controllers
             return Ok(quotes);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<QuoteDto>> Create(QuoteCreationDto quote)
+        {
+            var response = await _quoteService.Create(quote);
+            return CreatedAtAction("GetById", new { id = response.Id }, response);
+        }
+
         /// <summary>
         /// Retrieves a quote by its ID.
         /// </summary>
@@ -70,7 +77,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetQuote")]
         public async Task<ActionResult<QuoteDto>> GetById(int id)
         {
             if (id <= 0)
@@ -156,5 +163,6 @@ namespace boomerio.Controllers
             }
             return Ok(quotes);
         }
+
     }
 }

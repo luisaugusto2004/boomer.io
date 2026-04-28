@@ -19,7 +19,7 @@ namespace boomerio.Repositories.QuoteRepository
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
-                .ThenInclude(q => q.Franchise)
+                .ThenInclude(q => q!.Franchise)
                 .Where(q => q.CharacterId == idCharacter)
                 .OrderBy(q => q.Id)
                 .ToListAsync();
@@ -29,7 +29,7 @@ namespace boomerio.Repositories.QuoteRepository
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
-                .ThenInclude(q => q.Franchise)
+                .ThenInclude(q => q!.Franchise)
                 .ToListAsync();
         }
 
@@ -37,7 +37,7 @@ namespace boomerio.Repositories.QuoteRepository
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
-                .ThenInclude(q => q.Franchise)
+                .ThenInclude(q => q!.Franchise)
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
 
@@ -53,7 +53,7 @@ namespace boomerio.Repositories.QuoteRepository
 
             var quote = await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
-                .ThenInclude(c => c.Franchise)
+                .ThenInclude(c => c!.Franchise)
                 .OrderBy(q => q.Id)
                 .Skip(index)
                 .FirstAsync();
@@ -66,7 +66,7 @@ namespace boomerio.Repositories.QuoteRepository
         {
             return await _context
                 .Quotes.AsNoTracking().Include(q => q.Character)
-                .ThenInclude(c => c.Franchise)
+                .ThenInclude(c => c!.Franchise)
                 .Where(q => q.QuoteText.Contains(query))
                 .ToListAsync();
         }
@@ -75,7 +75,9 @@ namespace boomerio.Repositories.QuoteRepository
         {
             await _context.AddAsync(quote);
             await _context.SaveChangesAsync();
-            return quote;
+
+            var quoteWithRelations = await _context.Quotes.Include(q => q.Character).ThenInclude(c => c!.Franchise).FirstOrDefaultAsync(q => q.Id == quote.Id);
+            return quoteWithRelations!;
         }
     }
 }
