@@ -51,5 +51,7 @@ namespace boomerio.Services.Cache.QuotesCache
         public Task<IEnumerable<QuoteDto>> GetByQuery(string query) => _inner.GetByQuery(query);
 
         public Task<QuoteDto?> GetRandomQuote() => _inner.GetRandomQuote();
+
+        public Task<QuoteDto> UpdateQuoteValue(int quoteId, QuoteValueUpdateDto quote) => _inner.UpdateQuoteValue(quoteId, quote);
     }
 }

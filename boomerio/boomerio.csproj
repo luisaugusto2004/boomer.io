@@ -13,6 +13,9 @@
     <UserSecretsId>cd0504a9-e3a9-4051-aaa4-593f45309bd7</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="DTOs\QuoteDTOs\GenericUpdateDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="10.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">

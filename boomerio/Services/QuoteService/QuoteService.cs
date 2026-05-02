@@ -78,6 +78,22 @@ namespace boomerio.Services.QuoteService
             return ToDto(resultado);
         }
 
+        public async Task<QuoteDto> UpdateQuoteValue(int quoteId, QuoteValueUpdateDto quote)
+        {
+            if (quote == null || string.IsNullOrWhiteSpace(quote.Value) || quoteId <= 0 || quote.Value.Length < 5)
+            {
+                throw new BadRequestException("Quote value and a valid quote ID are required.");
+            }
+            var originalQuote = await _quoteRepository.GetByIdAsync(quoteId);
+            if (originalQuote == null)
+            {
+                throw new NotFoundException("The quote with the given id was not found");
+            }
+            var editedQuote = originalQuote;
+            editedQuote.QuoteText = quote.Value;
+            await _quoteRepository.Patch(editedQuote);
+            return ToDto(editedQuote);
+        }
         public QuoteDto ToDto(QuoteModel quote) =>
             new QuoteDto
             {

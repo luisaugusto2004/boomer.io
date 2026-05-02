@@ -28,7 +28,7 @@ namespace boomerio.Repositories.QuoteRepository
         public async Task<IEnumerable<QuoteModel>> GetAllAsync()
         {
             return await _context
-                .Quotes.AsNoTracking().Include(q => q.Character)
+                .Quotes.Include(q => q.Character)
                 .ThenInclude(q => q!.Franchise)
                 .ToListAsync();
         }
@@ -78,6 +78,12 @@ namespace boomerio.Repositories.QuoteRepository
 
             var quoteWithRelations = await _context.Quotes.Include(q => q.Character).ThenInclude(c => c!.Franchise).FirstOrDefaultAsync(q => q.Id == quote.Id);
             return quoteWithRelations!;
+        }
+
+        public async Task Patch(QuoteModel quote)
+        {
+            _context.Update(quote);
+            await _context.SaveChangesAsync();
         }
     }
 }

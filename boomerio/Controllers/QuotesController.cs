@@ -65,6 +65,13 @@ namespace boomerio.Controllers
             return CreatedAtAction("GetById", new { id = response.Id }, response);
         }
 
+        [HttpPatch("{id}/quoteValue")]
+        public async Task<ActionResult> UpdateQuoteValue([FromRoute] int id, QuoteValueUpdateDto quote)
+        {
+            var response = await _quoteService.UpdateQuoteValue(id, quote);
+            return Ok(response);
+        }
+
         /// <summary>
         /// Retrieves a quote by its ID.
         /// </summary>

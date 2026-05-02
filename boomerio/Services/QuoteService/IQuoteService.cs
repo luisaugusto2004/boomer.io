@@ -10,5 +10,6 @@ namespace boomerio.Services.QuoteService
         Task<QuoteDto?> GetRandomQuote();
         Task<IEnumerable<QuoteDto>> GetByQuery(string query);
         Task<QuoteDto> Create(QuoteCreationDto quote);
+        Task<QuoteDto> UpdateQuoteValue(int quoteId, QuoteValueUpdateDto quote);
     }
 }
