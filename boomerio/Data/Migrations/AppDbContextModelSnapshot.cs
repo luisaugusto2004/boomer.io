@@ -7,7 +7,7 @@ using boomerio.Data;
 
 #nullable disable
 
-namespace boomerio.Data.Migrations
+namespace boomerio.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace boomerio.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.7");
 
             modelBuilder.Entity("boomerio.Models.CharacterModel", b =>
                 {

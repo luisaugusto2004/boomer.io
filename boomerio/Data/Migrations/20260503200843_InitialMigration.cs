@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace boomerio.Data.Migrations
+namespace boomerio.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrating_to_SQLite : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,9 +73,10 @@ namespace boomerio.Data.Migrations
                 column: "FranchiseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quotes_CharacterId",
+                name: "IX_Quotes_CharacterId_QuoteText",
                 table: "Quotes",
-                column: "CharacterId");
+                columns: new[] { "CharacterId", "QuoteText" },
+                unique: true);
         }
 
         /// <inheritdoc />

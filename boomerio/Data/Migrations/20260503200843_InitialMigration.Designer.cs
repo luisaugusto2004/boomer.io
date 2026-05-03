@@ -8,17 +8,17 @@ using boomerio.Data;
 
 #nullable disable
 
-namespace boomerio.Data.Migrations
+namespace boomerio.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250716220544_Migrating_to_SQLite")]
-    partial class Migrating_to_SQLite
+    [Migration("20260503200843_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.15");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.7");
 
             modelBuilder.Entity("boomerio.Models.CharacterModel", b =>
                 {
@@ -80,7 +80,8 @@ namespace boomerio.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("CharacterId", "QuoteText")
+                        .IsUnique();
 
                     b.ToTable("Quotes");
                 });
