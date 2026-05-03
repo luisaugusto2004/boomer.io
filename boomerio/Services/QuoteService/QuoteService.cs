@@ -4,6 +4,7 @@ using boomerio.Exceptions;
 using boomerio.Models;
 using boomerio.Repositories.QuoteRepository;
 using boomerio.Services.CharacterService;
+using System.Collections;
 
 namespace boomerio.Services.QuoteService
 {
@@ -91,19 +92,48 @@ namespace boomerio.Services.QuoteService
             }
             var editedQuote = originalQuote;
             editedQuote.QuoteText = quote.Value;
-            await _quoteRepository.Patch(editedQuote);
+            await _quoteRepository.Update(editedQuote);
             return ToDto(editedQuote);
         }
+        
+        public async Task<QuoteDto> UpdateCharacterIdValue(int quoteId, QuoteCharacterIdUpdateDto characterId)
+        {
+            if (quoteId <= 0 || characterId.CharacterId <= 0)
+            {
+                throw new BadRequestException("A valid quote id and character id are required");
+            }
+            var quote = await _quoteRepository.GetByIdForUpdateAsync(quoteId);
+            if (quote == null)
+            {
+                throw new NotFoundException("Quote does not exist");
+            }
+            if (!await _characterService.Exists(characterId.CharacterId))
+            {
+                throw new NotFoundException("Character does not exist");
+            }
+            if (quote.CharacterId == characterId.CharacterId)
+            {
+                throw new BadRequestException("This quote already belongs to this character");
+            }
+            quote.CharacterId = characterId.CharacterId;
+            await _quoteRepository.Update(quote);
+            var updatedQuote = await _quoteRepository.GetByIdForUpdateAsync(quoteId);
+            if (updatedQuote == null)
+                throw new NotFoundException("Quote not found after update");
+
+            return ToDto(updatedQuote);
+        }
+
         public QuoteDto ToDto(QuoteModel quote) =>
             new QuoteDto
             {
                 Id = quote.Id,
                 CreatedAt = quote.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
                 UpdatedAt = quote.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
-                Franchise = quote.Character!.Franchise.Name,
-                IconUrl = quote.Character.Franchise.IconUrl,
-                CharacterId = quote.Character.Id,
-                Character = quote.Character.Name,
+                Franchise = quote.Character?.Franchise?.Name,
+                IconUrl = quote.Character?.Franchise?.IconUrl,
+                CharacterId = quote.CharacterId,
+                Character = quote.Character?.Name,
                 Value = quote.QuoteText,
             };
     }

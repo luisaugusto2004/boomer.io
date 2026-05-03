@@ -58,6 +58,18 @@ namespace boomerio.Controllers
             return Ok(quotes);
         }
 
+        /// <summary>
+        /// Create a quote
+        /// </summary>
+        /// /// <param name="quote">The data to create the quote</param>
+        /// <response code="201">Returns the created quote.</response>
+        /// <response code="400">If the quote data is invalid.</response>
+        /// <response code="404">If the quote character of the given id does not exist</response>
+        /// <response code="500">If an internal server error occurs.</response>
+        [ProducesResponseType(typeof(QuoteDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult<QuoteDto>> Create(QuoteCreationDto quote)
         {
@@ -65,10 +77,43 @@ namespace boomerio.Controllers
             return CreatedAtAction("GetById", new { id = response.Id }, response);
         }
 
+        /// <summary>
+        /// Update the quote value of the given quote id.
+        /// </summary>
+        /// <param name="id">The ID of the quote to update.</param>
+        /// <param name="quote">The quote value to update.</param>
+        /// <response code="200">Returns the updated quote.</response>
+        /// <response code="400">If the ID or the quote value is invalid.</response>
+        /// <response code="404">If the quote with the specified ID does not exist.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+        [ProducesResponseType(typeof(QuoteDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPatch("{id}/quoteValue")]
         public async Task<ActionResult> UpdateQuoteValue([FromRoute] int id, QuoteValueUpdateDto quote)
         {
             var response = await _quoteService.UpdateQuoteValue(id, quote);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Update the quote value of the given quote id.
+        /// </summary>
+        /// <param name="id">The ID of the quote to update.</param>
+        /// <param name="characterId">The character ID value to update.</param>
+        /// <response code="200">Returns the updated quote.</response>
+        /// <response code="400">If the ID or the character ID are invalid.</response>
+        /// <response code="404">If the quote with the specified ID or character ID does not exist.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+        [ProducesResponseType(typeof(QuoteDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpPatch("{id}/characterId")]
+        public async Task<ActionResult> UpdateCharacterIdValue([FromRoute] int id, QuoteCharacterIdUpdateDto characterId)
+        {
+            var response = await _quoteService.UpdateCharacterIdValue(id, characterId);
             return Ok(response);
         }
 
