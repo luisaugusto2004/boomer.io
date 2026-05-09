@@ -73,7 +73,7 @@ namespace boomerio.Controllers
         [HttpPost]
         public async Task<ActionResult<QuoteDto>> Create(QuoteCreationDto quote)
         {
-            var response = await _quoteService.Create(quote);
+            var response = await _quoteService.CreateQuote(quote);
             return CreatedAtAction("GetById", new { id = response.Id }, response);
         }
 
@@ -91,7 +91,7 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPatch("{id}/quoteValue")]
-        public async Task<ActionResult> UpdateQuoteValue([FromRoute] int id, QuoteValueUpdateDto quote)
+        public async Task<ActionResult<QuoteDto>> UpdateQuoteValue([FromRoute] int id, QuoteValueUpdateDto quote)
         {
             var response = await _quoteService.UpdateQuoteValue(id, quote);
             return Ok(response);
@@ -111,10 +111,28 @@ namespace boomerio.Controllers
         [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPatch("{id}/characterId")]
-        public async Task<ActionResult> UpdateCharacterIdValue([FromRoute] int id, QuoteCharacterIdUpdateDto characterId)
+        public async Task<ActionResult<QuoteDto>> UpdateCharacterIdValue([FromRoute] int id, QuoteCharacterIdUpdateDto characterId)
         {
             var response = await _quoteService.UpdateCharacterIdValue(id, characterId);
             return Ok(response);
+        }
+        /// <summary>
+        /// Deletes the quote with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the quote to delete.</param>
+        /// <response code="204">The quote was successfully deleted.</response>
+        /// <response code="400">If the ID is invalid.</response>
+        /// <response code="404">If the quote with the specified ID does not exist.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteQuote([FromRoute] int id)
+        {
+            await _quoteService.DeleteQuote(id);
+            return NoContent();
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace boomerio.Repositories.QuoteRepository
         Task<QuoteModel?> GetRandomQuote();
         Task<IEnumerable<QuoteModel>> GetByQueryAsync(string query);
         Task<QuoteModel> Create(QuoteModel quote);
-        Task<QuoteModel> Update(QuoteModel quote);
+        Task Update(QuoteModel quote);
+        Task Delete(QuoteModel quote);
     }
 }

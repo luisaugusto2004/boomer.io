@@ -59,7 +59,7 @@ namespace boomerio.Services.QuoteService
             return ToDto(quote);
         }
 
-        public async Task<QuoteDto> Create(QuoteCreationDto quote)
+        public async Task<QuoteDto> CreateQuote(QuoteCreationDto quote)
         {
             if(quote == null || string.IsNullOrWhiteSpace(quote.Value) || quote.CharacterId <= 0)
             {
@@ -122,6 +122,20 @@ namespace boomerio.Services.QuoteService
                 throw new NotFoundException("Quote not found after update");
 
             return ToDto(updatedQuote);
+        }
+
+        public async Task DeleteQuote(int id)
+        {
+            if (id <= 0)
+            {
+                throw new BadRequestException("A valid quote ID is required.");
+            }
+            var quote = await _quoteRepository.GetByIdAsync(id);
+            if (quote == null)
+            {
+                throw new NotFoundException("The quote with the given id was not found");
+            }
+            await _quoteRepository.Delete(quote);
         }
 
         public QuoteDto ToDto(QuoteModel quote) =>

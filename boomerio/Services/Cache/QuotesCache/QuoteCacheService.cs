@@ -20,7 +20,9 @@ namespace boomerio.Services.Cache.QuotesCache
             };
         }
 
-        public Task<QuoteDto> Create(QuoteCreationDto quote) => _inner.Create(quote);
+        public Task<QuoteDto> CreateQuote(QuoteCreationDto quote) => _inner.CreateQuote(quote);
+
+        public Task DeleteQuote(int id) => _inner.DeleteQuote(id);
 
         public async Task<IEnumerable<QuoteDto>> GetAll()
         {

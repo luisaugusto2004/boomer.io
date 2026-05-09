@@ -87,13 +87,16 @@ namespace boomerio.Repositories.QuoteRepository
             return await _context.Quotes.Include(q => q.Character).ThenInclude(c => c.Franchise).FirstOrDefaultAsync(q => q.Id == quote.Id);
         }
 
-        public async Task<QuoteModel> Update(QuoteModel quote)
+        public async Task Update(QuoteModel quote)
         {
             _context.Update(quote);
             await _context.SaveChangesAsync();
+        }
 
-            return await _context.Quotes.Include(q => q.Character).ThenInclude(c => c.Franchise).FirstOrDefaultAsync(q => q.Id == quote.Id);
-
+        public async Task Delete(QuoteModel quote)
+        {
+            _context.Remove(quote);
+            await _context.SaveChangesAsync();
         }
     }
 }
